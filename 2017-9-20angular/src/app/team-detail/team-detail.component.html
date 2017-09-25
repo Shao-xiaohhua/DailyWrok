@@ -1,0 +1,12 @@
+<div *ngIf="teamDetail">
+  <h2>{{ teamDetail.name }} 详细信息</h2>
+  <div>
+    <label>id: </label>
+    <span>{{ teamDetail.id }}</span>
+  </div>
+
+  <div>
+    <label>姓名: </label>
+    <input type="text" [(ngModel)]="teamDetail.name">
+  </div>
+</div>
