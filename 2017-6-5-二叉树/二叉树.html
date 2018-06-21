@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Node (data, left, right) {
+      this.data = data;
+      this.left = left;
+      this.right = right;
+    }
+
+    function BST () {
+      this.root = null;
+      this.insert = insert;
+      this.find = find;
+      // this.remove = remove;
+    }
+
+    /*
+      二叉数增加节点
+     */
+    function insert (data) {
+      var node = new Node(data, null, null);
+      if (this.root == null) {
+        this.root = node;
+      } else {
+        var current = this.root
+        while(true) {
+          if (current.data > data) {
+            if (current.left === null) {
+              current.left = node;
+              break;
+            }
+            current = current.left;
+          } else {
+            if (current.right === null) {
+              current.right = node;
+              break;
+            }
+            current = current.right;
+          }
+        }
+      }
+    }
+    
+    function find (data) {
+      var current = this.root;
+      while(true) {
+        if (data === current.data) {
+          return current;
+        }
+        current = data < current.data ? current.left : current.right;
+        if (current === null) {
+          return null;
+        }
+      }
+    }
+
+    var object2 = function (text) {
+      this.name = text;
+      console.log(this.name)
+    }
+     
+     var aa = new object2('这是个构造函数');
+     
+     console.log(object2.prototype)
+     object2.prototype.bb = function () {
+      console.log(this.name + '加了个prototype');
+     }
+     aa.bb();
+      
+    var bst = new BST();
+    bst.insert(500000000);
+    bst.insert(2);
+    bst.insert(4);
+    bst.insert(7);
+    bst.insert(2);
+    bst.insert(9);
+    console.log('-----------------------------');
+    console.log(bst.root);
+    console.log(bst.find(2));
+  </script>
+</body>
+</html>
