@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>setTimeout调用自身</title>
+</head>
+<body>
+    <script>
+        var i;
+        var num = 0;
+        var f = function () {
+            if (num < 50) {
+                num++
+            } else {
+                return
+            }
+            console.log(num)
+            i = setTimeout(f, 1000)
+        }
+        f()    
+    </script>
+</body>
+</html>
