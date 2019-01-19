@@ -95,7 +95,6 @@ let Sxh: Person = {
 Sxh.name = 'Zwt';
 
 console.log(Sxh.name);
-
 /*数组的类型*/
 
 /*「类型 + 方括号」表示法*/
