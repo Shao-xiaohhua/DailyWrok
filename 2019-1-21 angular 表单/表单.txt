@@ -1,0 +1,76 @@
+﻿表单
+	提交表单事件：
+		<form (ngSubmit)="提交事件)()"></form>
+
+	1.响应式表单：
+		①不使用form标签单行输入： 
+			ts中设置：
+				变量 = new FormControl('');
+			html中使用：
+				<input type="text" [formControl]="变量" />
+			ts中调用并更改变量：
+				this.变量.setValue(值);
+
+		②使用form标签，并用FormGroup进行表单数据管理：
+			ts中设置：
+				变量 = new FormGroup({
+				    子变量: new FormControl(''),
+				    ...
+				});
+			html中使用：
+				<form [formGroup]="变量">
+					<input type="text" formControlName="子变量" />
+					...
+				</form>
+			ts中调用并更改变量：(对象结构不能增减，需与原变量group内对象保持一致)
+				this.变量.setValue({
+					子变量： 值,
+					...
+				});
+
+		③使用form标签，并用FormBuilder类进行数据管理
+			ts中设置：
+				变量 = this.类名.group({
+				    子变量: [''],    (或new FormControl(''))
+				    嵌套变量: this.类名.group({
+				      	嵌套子变量: [''],
+				    	...
+				    }),
+				    数组变量: this.类名.array([
+				      	this.类名.control(''),
+				    	...
+				    ]),
+				    ...
+				 });
+				constructor(private 类名: FormBuilder) {}
+				get 获取数组变量函数名() {
+				    return this.变量.get('数组变量') as FormArray;
+				}
+			html中使用：
+				<form [formGroup]="变量">
+					<input type="text" formControlName="子变量" />
+					...
+					<div formGroupName="嵌套变量">
+						<input type="text" formControlName="嵌套子变量" />
+						...
+					</div>
+					<div formArrayName="数组变量">
+					    <div *ngFor="let item of 数组变量.controls; let i = index">
+					      <input type="text" [formControlName]="i"/>
+					    </div>
+					</div>
+				</form>
+			ts中调用并更改变量：
+				this.变量.patchValue({
+			      	子变量: 值,
+			      	嵌套变量: {
+			      	  	嵌套子变量: 值
+			      	}
+			    });
+			    this.获取数组变量函数名.controls[数组下标].setValue(值)
+			    this.获取数组变量函数名.push(this.fb.control(''));
+
+		获取表单的数据：
+			变量.value
+	2.模板驱动表单：
+		<input type="text" [(ngModel)]="表单变量" name="name名">
