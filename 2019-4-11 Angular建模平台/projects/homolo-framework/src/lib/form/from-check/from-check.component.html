@@ -1,0 +1,130 @@
+<div class="check-wrapper">
+  <div class="check-content">
+    <div class="check-header clearfix">
+      <div class="header-item pull-left">
+        <div class="item-title pull-left">规则名称:</div>
+        <input class="item-input pull-left" nz-input placeholder="请输入" [(ngModel)]="ruleName">
+      </div>
+      <div class="header-item pull-left">
+        <div class="item-title pull-left">使用状态:</div>
+        <nz-select class="item-input pull-left" [(ngModel)]="ruleStatus" nzAllowClear nzPlaceHolder="请选择">
+          <nz-option nzValue="jack" nzLabel="关闭"></nz-option>
+          <nz-option nzValue="lucy" nzLabel="运行中"></nz-option>
+        </nz-select>
+      </div>
+      <div class="header-item pull-left" *ngIf="expandForm">
+        <div class="item-title pull-left">调用次数:</div>
+        <nz-input-number class="item-input pull-left" [(ngModel)]="ruleNumber" [nzStep]="1"></nz-input-number>
+      </div>
+      <div class="header-item pull-left" *ngIf="expandForm">
+        <div class="item-title pull-left">更新日期:</div>
+        <nz-date-picker class="item-input pull-left" [(ngModel)]="ruleData" (ngModelChange)="onChange($event)"
+          [nzPlaceHolder]="'请输入更新日期'"></nz-date-picker>
+      </div>
+      <div class="header-item pull-left" *ngIf="expandForm">
+        <div class="item-title pull-left">使用状态:</div>
+        <nz-select class="item-input pull-left" [(ngModel)]="ruleStatusTwo" nzAllowClear nzPlaceHolder="请选择">
+          <nz-option nzValue="close" nzLabel="关闭"></nz-option>
+          <nz-option nzValue="open" nzLabel="运行中"></nz-option>
+        </nz-select>
+      </div>
+      <div class="header-item pull-left" *ngIf="expandForm">
+        <div class="item-title pull-left">使用状态:</div>
+        <nz-select class="item-input pull-left" [(ngModel)]="ruleStatusThree" nzAllowClear nzPlaceHolder="请选择">
+          <nz-option nzValue="close" nzLabel="关闭"></nz-option>
+          <nz-option nzValue="open" nzLabel="运行中"></nz-option>
+        </nz-select>
+      </div>
+      <div class="header-item pull-right">
+        <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading" (click)="search()">查询</button>
+        <button nz-button type="reset" class="mx-sm button-reset" (click)="reset()">重置</button>
+        <a (click)="expandForm=!expandForm">
+          {{expandForm ? '收起' : '展开'}}
+          <i class="anticon" [class.anticon-down]="!expandForm" [class.anticon-up]="expandForm"></i>
+        </a>
+      </div>
+    </div>
+
+    <button class="submit-button" nz-button [nzType]="'primary'" (click)="showModal()">
+      <i nz-icon type="plus"></i>
+      <span>新建</span>
+    </button>
+    <button *ngIf="operationStatus" class="submit-button" nz-button nzType="default">批量操作</button>
+    <nz-select *ngIf="operationStatus" style="width: 108px;margin-left: 8px;" [(ngModel)]="moreOperation" nzAllowClear
+      nzPlaceHolder="更多操作" (ngModelChange)="cancleItem()">
+      <nz-option nzValue="delete" nzLabel="删除"></nz-option>
+      <nz-option nzValue="apply" nzLabel="批量审批"></nz-option>
+    </nz-select>
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="新建规则" (nzOnCancel)="handleCancel()" (nzOnOk)="handleSubmit()">
+      <div class="modal-main clearfix">
+        <div class="modal-intro pull-left">
+          <i class="modal-icon" nz-icon type="star" theme="outline"></i>
+          描述:
+        </div>
+        <div class="modal-right pull-right">
+          <input class="modal-input" [class.active]="inputError" nz-input placeholder="请输入" [(ngModel)]="newRule"
+            (input)="checkNumber()">
+          <div class="modal-error" *ngIf="inputError">请输入至少五个字符的规则描述！</div>
+        </div>
+      </div>
+    </nz-modal>
+    <div class="check-tab clearfix">
+      <i nz-icon class="tab-icon pull-left" type="info-circle" theme="outline"></i>
+      <div class="tab-title pull-left">已选择
+        <span class="tab-number">{{checkNumberCount}}</span>
+        项 服务调用次数总计
+        <span class="tab-all">{{checkMainNumber}}万</span>
+      </div>
+      <a href="javascript:;" class="tab-right pull-left" *ngIf="operationStatus" (click)="clearCheck()">清空</a>
+    </div>
+    <div class="check-table">
+
+      <nz-table [nzData]="listOfData" (nzCurrentPageDataChange)="currentPageDataChange($event)"
+        [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th nzShowCheckbox [nzSelections]="listOfSelection" [(nzChecked)]="isAllDisplayDataChecked"
+              [nzIndeterminate]="isIndeterminate" (nzCheckedChange)="checkAll($event)"></th>
+            <th>规则名称</th>
+            <th>描述</th>
+            <th nzShowSort nzSortKey="number">服务调用次数</th>
+            <th nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)"><span>状态</span></th>
+            <th nzShowSort nzSortKey="time">上次调度时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfData">
+            <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()"></td>
+            <td><a href="javascript:;">{{ data.name }}</a></td>
+            <td>{{ data.intro }}</td>
+            <td>{{ data.number }}</td>
+            <td>
+              <div class="data-status clearfix">
+                <div class="status-cricle-main pull-left">
+                  <span class="status-cricle"
+                    [ngClass]="{'red':data.status === '异常','green':data.status === '已上线','blue':data.status === '运行中'}">
+
+                  </span>
+                  <span *ngIf="data.status === '运行中'" class="blue-circle"></span>
+                </div>
+                <div class="cricle-content pull-left">
+                  {{ data.status }}</div>
+              </div>
+
+            </td>
+            <td>{{ data.time}}</td>
+            <td><a href="javascript:;" class="opration-link">配置</a><a href="javascript:;" class="opration-link">订阅警报</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <div class="page-content clearfix">
+      <nz-pagination class="pull-right" [nzPageIndex]="1" [nzTotal]="500" nzShowSizeChanger [nzPageSize]="10"
+        nzShowQuickJumper>
+      </nz-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="form-show">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null">{{ $widget.label }}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <div *ngIf="display" style="color:#bbb;" [nzTitle]="$widget.xtype" nzPlacement="topLeft" nz-tooltip>
+        {{display}}
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+</div>

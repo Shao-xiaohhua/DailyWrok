@@ -1,0 +1,19 @@
+<div [formGroup]="form" [class.has-error]="!isValid && (isDirty || isTouched)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <nz-cascader
+      [formControlName]="$widget.fieldName"
+      [nzOptions]="cnZone ? cnZone.children : []"
+      [nzLabelProperty]="'name'"
+      [nzValueProperty]="'code'"
+      [nzShowSearch]="true"
+      [(ngModel)]="values"
+      [nzPlaceHolder]= "'请选择地区'"
+      (nzSelectionChange)="onSelectionChange($event)"
+      >
+      </nz-cascader>
+      <nz-form-explain *ngIf="!isValid && (isDirty || isTouched)">{{$widget.label}}不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+</div>

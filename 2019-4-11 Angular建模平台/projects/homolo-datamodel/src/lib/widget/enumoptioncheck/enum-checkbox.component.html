@@ -1,0 +1,20 @@
+<div [formGroup]="form" [class.has-error]="!isValid && (isDirty || isTouched)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <!-- 单选框 -->
+      <ng-container *ngIf="!$widget.array">
+        <nz-radio-group [(ngModel)]="form.value[$widget.fieldName]" [formControlName]="$widget.fieldName" [id]="$widget.fieldName" [nzDisabled]="$widget.readonly">
+          <ng-container *ngFor="let option of options">
+            <label nz-radio [nzValue]="option.value">{{option.label}}</label>
+          </ng-container>
+        </nz-radio-group>
+      </ng-container>
+      <!-- 多选框-->
+      <ng-container *ngIf="$widget.array">
+        <nz-checkbox-group  [formControlName]="$widget.fieldName" [ngModel]="options" (ngModelChange)="selectChange()"></nz-checkbox-group>
+      </ng-container>
+      <nz-form-explain *ngIf="!isValid && (isDirty || isTouched)">{{$widget.label}}不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+</div>

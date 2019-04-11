@@ -1,0 +1,126 @@
+<div class="login-body" style="background-image: url(../../../../assets/images/bgimg.png);">
+  <div *ngIf="!isShowChangePassword" class="login">
+    <h1 class="login-title">
+      <img src="assets/images/logo.png" alt="" />
+      <span>Homolo Angular app</span>
+      <p>Homolo Angular app 是同道研究院的底层前端框架</p>
+    </h1>
+    <nz-tabset class="tab-list" [nzAnimated]="false" [nzTabBarStyle]="tabBarStyle">
+      <nz-tab nzTitle="账号密码登录">
+        <div class="input-wrap" [ngClass]="userLogin.name.swite ? 'error' : ''">
+          <nz-input-group [nzSuffix]="name" [nzPrefix]="prefixTemplate" [nzSize]="'large'">
+            <input (keyup)="inputSubmit($event)" type="text" nz-input placeholder="请输入用户名"
+              [(ngModel)]="userLogin.name.content" (input)="userLogin.name.swite = false" (blur)="isShowCode()" />
+          </nz-input-group>
+          <nz-form-explain *ngIf="userLogin.name.swite"><span class="eror-text">{{
+              userLogin.name.error
+            }}</span></nz-form-explain>
+          <ng-template #prefixTemplate><i nz-icon type="user"></i></ng-template>
+          <ng-template #name><i nz-icon type="close-circle" (click)="userLogin.name.content = null"
+              *ngIf="userLogin.name.content"></i></ng-template>
+        </div>
+        <div class="input-wrap" [ngClass]="this.userLogin.password.swite ? 'error' : ''">
+          <nz-input-group [nzSuffix]="suffixTemplate" [nzPrefix]="prefixLock" [nzSize]="'large'">
+            <input (keyup)="inputSubmit($event)" [type]="passwordVisible ? 'text' : 'password'" nz-input
+              placeholder="请输入密码" [(ngModel)]="userLogin.password.content"
+              (input)="this.userLogin.password.swite = false" autocomplete="off" />
+          </nz-input-group>
+          <nz-form-explain *ngIf="this.userLogin.password.swite"><span class="eror-text">{{
+              userLogin.password.error
+            }}</span></nz-form-explain>
+          <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+          <ng-template #suffixTemplate>
+            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+              (click)="passwordVisible = !passwordVisible"></i>
+          </ng-template>
+        </div>
+        <div *ngIf="isShowCodeInput" class="input-wrap" [ngClass]="userLogin.code.swite ? 'error' : ''">
+          <div nz-row [nzGutter]="8">
+            <div nz-col [nzSpan]="16">
+              <nz-input-group [nzSuffix]="code" [nzSize]="'large'">
+                <input nz-input placeholder="请输入验证码" [(ngModel)]="userLogin.code.content"
+                  (input)="userLogin.code.swite = false" />
+              </nz-input-group>
+              <nz-form-explain *ngIf="this.userLogin.code.swite"><span class="eror-text">{{
+                  userLogin.code.error
+                }}</span></nz-form-explain>
+              <ng-template #code><i nz-icon type="close-circle" (click)="userLogin.code.content = null"
+                  *ngIf="userLogin.code.content"></i></ng-template>
+            </div>
+            <div nz-col [nzSpan]="8">
+              <div (click)="getChangeCodeImg()" class="img-code">
+                <img *ngIf="changeCodeImg" class="code-show" src="ssp/Kaptcha.jpg" alt="" srcset="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="input-wrap">
+          <label nz-checkbox [(ngModel)]="userLogin.rememberMe">自动登录</label>
+          <a href="javascript:;" class="login-form-forgot" class="login-form-forgot">忘记密码?</a>
+        </div>
+        <div class="input-wrap">
+          <button nz-button type="button" nzType="primary" [nzSize]="'large'" nzBlock (click)="submit()"
+            [disabled]="!submitFlag">
+            登录
+          </button>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="手机号登录">
+        建设中...
+      </nz-tab>
+    </nz-tabset>
+  </div>
+  <div *ngIf="isShowChangePassword" class="change-password">
+    <h1 class="login-title">
+      <img src="assets/images/logo.png" alt="" />
+      <span>Homolo Angular app</span>
+      <p>为了您的账号安全，请修改密码</p>
+    </h1>
+    <div class="change-password-inner">
+      <div class="input-wrap" [ngClass]="this.changePaw.newPaw.swite ? 'error' : ''">
+        <nz-input-group [nzSuffix]="newPaw" [nzPrefix]="prefixLock" [nzSize]="'large'">
+          <input [type]="newPawVisible ? 'text' : 'password'" nz-input placeholder="新密码"
+            [(ngModel)]="changePaw.newPaw.content" (input)="this.changePaw.newPaw.swite = false" />
+        </nz-input-group>
+        <nz-form-explain *ngIf="this.changePaw.newPaw.swite"><span class="eror-text">{{
+            changePaw.newPaw.error
+          }}</span></nz-form-explain>
+        <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+        <ng-template #newPaw>
+          <i nz-icon [nzType]="newPawVisible ? 'eye-invisible' : 'eye'" (click)="newPawVisible = !newPawVisible"></i>
+        </ng-template>
+      </div>
+      <div class="input-wrap" [ngClass]="this.changePaw.comPaw.swite ? 'error' : ''">
+        <nz-input-group [nzSuffix]="comPaw" [nzPrefix]="prefixLock" [nzSize]="'large'">
+          <input [type]="comPawVisible ? 'text' : 'password'" nz-input placeholder="确认密码"
+            [(ngModel)]="changePaw.comPaw.content" (input)="this.changePaw.comPaw.swite = false" />
+        </nz-input-group>
+        <nz-form-explain *ngIf="this.changePaw.comPaw.swite"><span class="eror-text">{{
+            changePaw.comPaw.error
+          }}</span></nz-form-explain>
+        <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+        <ng-template #comPaw>
+          <i nz-icon [nzType]="comPawVisible ? 'eye-invisible' : 'eye'" (click)="comPawVisible = !comPawVisible"></i>
+        </ng-template>
+      </div>
+      <div class="cipherSpec">
+        <p>1、请在5分钟内修改密码。</p>
+        <p>2、必须为数字，字母，和字符串两种组合。</p>
+        <p>3、大于6位，小于20位。</p>
+        <p>4、不得与原密码相同。</p>
+        <p>5、不得用过于简单的密码如：123456等字符。</p>
+      </div>
+      <div class="clearfix">
+        <button class="btn-confirm pull-left" nz-button nzType="primary" [nzSize]="'large'"
+          (click)="isShowChangePassword = false">
+          重新登陆
+        </button>
+        <button class="btn-confirm pull-right" nz-button nzType="primary" [nzSize]="'large'" (click)="changePawCom()"
+          [disabled]="!changePwdFlag">
+          确认修改
+        </button>
+      </div>
+    </div>
+  </div>
+  <p class="footer-index-copyright">Copyright <i nz-icon type="copyright" theme="outline"></i> 2019 同道研究院出品</p>
+</div>

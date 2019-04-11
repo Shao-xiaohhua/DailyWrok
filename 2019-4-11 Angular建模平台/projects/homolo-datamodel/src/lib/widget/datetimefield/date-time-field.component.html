@@ -1,0 +1,10 @@
+<div [formGroup]="form" [class.has-error]="!isValid && (isDirty || isTouched)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <nz-date-picker nzShowTime [nzClassName]="'custom-input'" [nzStyle]="{width: '100%'}" [id]="$widget.fieldName" [formControlName]="$widget.fieldName" [nzDisabled]="$widget.readonly"
+        (ngModelChange)="ngOnChanges($event)" [(ngModel)]="displayAs"></nz-date-picker>
+      <nz-form-explain *ngIf="!isValid && (isDirty || isTouched)">{{$widget.label}}不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+</div>

@@ -1,0 +1,30 @@
+<div [ngSwitch]="widget.xtype">
+  <dm-displayfield *ngSwitchCase="widgetMap.displayfield" [widget]="widget" [form]="form"></dm-displayfield>
+  <dm-textfield *ngSwitchCase="widgetMap.textfield" [widget]="widget" [form]="form"></dm-textfield>
+  <dm-textarea *ngSwitchCase="widgetMap.textarea" [widget]="widget" [form]="form"></dm-textarea>
+  <!-- <dm-htmleditor *ngSwitchCase="widgetMap.htmleditor" [widget]="widget" [form]="form"></dm-htmleditor> -->
+  <dm-datefield *ngSwitchCase="widgetMap.datefield" [widget]="widget" [form]="form"></dm-datefield>
+  <dm-datetimefield *ngSwitchCase="widgetMap.datetimefield" [widget]="widget" [form]="form"></dm-datetimefield>
+  <dm-daterangefield *ngSwitchCase="widgetMap.daterangefield" [widget]="widget" [form]="form"></dm-daterangefield>
+  <dm-integerfield *ngSwitchCase="widgetMap.integerfield" [widget]="widget" [form]="form"></dm-integerfield>
+  <dm-integerrange *ngSwitchCase="widgetMap.integerrange" [widget]="widget" [form]="form"></dm-integerrange>
+  <dm-doublefield *ngSwitchCase="widgetMap.doublefield" [widget]="widget" [form]="form"></dm-doublefield>
+  <dm-floatfield *ngSwitchCase="widgetMap.floatfield" [widget]="widget" [form]="form"></dm-floatfield>
+  <dm-longfield *ngSwitchCase="widgetMap.longfield" [widget]="widget" [form]="form"></dm-longfield>
+  <dm-doublerange *ngSwitchCase="widgetMap.doublerange" [widget]="widget" [form]="form"></dm-doublerange>
+  <dm-booleancheckbox *ngSwitchCase="widgetMap.booleancheckbox" [widget]="widget" [form]="form"></dm-booleancheckbox>
+  <dm-booleanradio *ngSwitchCase="widgetMap.booleanradio" [widget]="widget" [form]="form"></dm-booleanradio>
+  <dm-optioncombo *ngSwitchCase="widgetMap.optioncombo" [widget]="widget" [form]="form"></dm-optioncombo>
+  <dm-optioncheck *ngSwitchCase="widgetMap.optioncheck" [widget]="widget" [form]="form"></dm-optioncheck>
+  <dm-enumfield *ngSwitchCase="widgetMap.enumfield" [widget]="widget" [form]="form"></dm-enumfield>
+  <dm-enumoptioncheck *ngSwitchCase="widgetMap.enumoptioncheck" [widget]="widget" [form]="form"></dm-enumoptioncheck>
+  <dm-entityfield *ngSwitchCase="widgetMap.entityfield" [widget]="widget" [form]="form"></dm-entityfield>
+  <dm-entitycombo *ngSwitchCase="widgetMap.entitycombo" [widget]="widget" [form]="form"></dm-entitycombo>
+  <dm-typecombo *ngSwitchCase="widgetMap.typecombo" [widget]="widget" [form]="form"></dm-typecombo>
+  <dm-zonecombo *ngSwitchCase="widgetMap.zonecombo" [widget]="widget" [form]="form"></dm-zonecombo>
+  <dm-imagefield *ngSwitchCase="widgetMap.imagefield" [widget]="widget" [form]="form"></dm-imagefield>
+  <dm-attachmentfield *ngSwitchCase="widgetMap.attachmentfield" [widget]="widget" [form]="form"></dm-attachmentfield>
+  <dm-attachmentdisplayfield *ngSwitchCase="widgetMap.attachmentdisplayfield" [widget]="widget" [form]="form"></dm-attachmentdisplayfield>
+  <!-- <dm-imagefielddisplay *ngSwitchCase="widgetMap.imagefielddisplay" [widget]="widget" [form]="form"></dm-imagefielddisplay> -->
+  <dm-defaultfield *ngSwitchDefault [widget]="widget" [form]="form"></dm-defaultfield>
+</div>

@@ -1,0 +1,60 @@
+<div class="set-basic">
+  <div class="basic-message">
+    <form nz-form (ngSubmit)="submitForm()">
+      <nz-form-item class="message-item">
+        <nz-form-control>
+          <nz-input-group>
+            <img [src]="domSanitizer.bypassSecurityTrustUrl(imageHeader)" alt="" class="header-image">
+            <div class="upload-button">
+              <i class="upload-icon" nz-icon type="upload" theme="outline"></i>
+              点击上传图片
+              <input class="uploaf-input" type="file" accept="image/*" (change)="fileChange($event)" multiple="multiple" />
+            </div>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="message-item">
+        <nz-form-control>
+          <nz-input-group>
+            <input class="message-input" [class.error]="nameSwitch" nz-input placeholder="Username" [(ngModel)]="user.userName"
+              name="userName" (input)="nameSwitch=false">
+          </nz-input-group>
+          <nz-form-explain class="error-world" *ngIf="nameSwitch">请输入用户名</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="message-item">
+        <nz-form-control>
+          <nz-input-group>
+            <input class="message-input" [class.error]="nickSwitch" nz-input placeholder="nickName" [(ngModel)]="user.nickName"
+              name="nickName" (input)="nickSwitch=false">
+          </nz-input-group>
+          <nz-form-explain class="error-world" *ngIf="nickSwitch">请输入昵称</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="message-item">
+        <nz-form-control>
+          <nz-input-group>
+            <input class="message-input" [class.error]="emailSwitch" nz-input placeholder="email" [(ngModel)]="user.email"
+              name="email" (input)="emailSwitch=false">
+          </nz-input-group>
+          <nz-form-explain class="error-world" *ngIf="emailSwitch">请输入正确的邮箱号</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="message-item">
+        <nz-form-control>
+          <nz-input-group>
+            <input class="message-input" [class.error]="mobileSwitch" nz-input placeholder="mobile" [(ngModel)]="user.mobile"
+              name="mobile" (input)="mobileSwitch=false">
+          </nz-input-group>
+          <nz-form-explain class="error-world" *ngIf="mobileSwitch">请输入正确的电话号码</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary">更新基本信息</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+  </div>
+</div>

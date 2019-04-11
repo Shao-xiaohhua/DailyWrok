@@ -1,0 +1,11 @@
+<nz-form-item>
+  <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null">{{ $widget.label }}</nz-form-label>
+  <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+    <div *ngIf="$widget.value" class="value">
+      <a *ngFor="let url of urls; let i = index"  [href]="url" target="_blank">{{ names[i] }}</a>&nbsp;&nbsp;
+    </div>
+    <div *ngIf="!$widget.value" class="value">
+      <span style="color:#bbb;">空</span>
+    </div>
+  </nz-form-control>
+</nz-form-item>

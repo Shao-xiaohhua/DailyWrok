@@ -1,0 +1,22 @@
+{
+  "/ssp": {
+    "target": "http://10.222.1.55:8094",
+    "changeOrigin": true,
+    "secure": "false"
+  },
+  "/common": {
+    "target": "http://10.222.1.55:8094",
+    "changeOrigin": true,
+    "secure": "false"
+  },
+  "/theme": {
+    "target": "http://10.222.1.55:8094",
+    "changeOrigin": true,
+    "secure": "false"
+  },
+  "/prototype": {
+    "target": "http://10.222.1.55:8094",
+    "changeOrigin": true,
+    "secure": "false"
+  }
+}

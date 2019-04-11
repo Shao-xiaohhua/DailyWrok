@@ -1,0 +1,98 @@
+<div class="wrapper wrapper-content" style="padding: 0 0 25px 0;">
+  <div class="row wrapper border-bottom white-bg page-heading"
+    *ngIf="config && (!config['hideHead'] || config['hideHead'] === false)">
+    <div class="col-sm-4">
+
+      <nz-breadcrumb class="tab-content">
+        <nz-breadcrumb-item>
+          <a [routerLink]="['/']">首页</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+          {{title}}
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+    </div>
+  </div>
+  <div class="m-t-md m-b-md animated fadeInRight">
+    <div class="add-item" *ngIf="isWindow !== true">
+      <h2 class="add-title">{{title}}
+        <ng-container *ngIf="simpleTitle"> - {{simpleTitle}}</ng-container>
+      </h2>
+      <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()" [nzLayout]="nzLayout"
+        [class]="nzLayout === 'vertical' ? '' : 'advanced-form ant-form'">
+        <fieldset *ngFor="let fieldset of fieldsets" class="fieldset-group">
+          <h3 *ngIf="fieldset.border === true" style="color: #383838;">{{fieldset.name}}</h3>
+          <div nz-row nzGutter="24" [ngSwitch]="fieldset.nzSpan" [class.border]="fieldset.border === true">
+            <ng-container *ngSwitchCase="12">
+              <div nz-col [nzSpan]="12">
+                <ng-container *ngFor="let widget of fieldset.widgets;let i=index">
+                  <dm-widget *ngIf="i < (fieldset.widgets.length/2)" [widget]="widget" [form]="form"></dm-widget>
+                </ng-container>
+              </div>
+              <div nz-col [nzSpan]="12">
+                <ng-container *ngFor="let widget of fieldset.widgets;let i=index">
+                  <dm-widget *ngIf="i >= (fieldset.widgets.length/2)" [widget]="widget" [form]="form"></dm-widget>
+                </ng-container>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="8">
+              <div nz-col [nzSpan]="8">
+                <ng-container *ngFor="let widget of fieldset.widgets;let i=index">
+                  <dm-widget *ngIf="i < (fieldset.widgets.length/3)" [widget]="widget" [form]="form"></dm-widget>
+                </ng-container>
+              </div>
+              <div nz-col [nzSpan]="8">
+                <ng-container *ngFor="let widget of fieldset.widgets;let i=index">
+                  <dm-widget *ngIf="i >= (fieldset.widgets.length/3) && i < (fieldset.widgets.length*2/3)"
+                    [widget]="widget" [form]="form"></dm-widget>
+                </ng-container>
+              </div>
+              <div nz-col [nzSpan]="8">
+                <ng-container *ngFor="let widget of fieldset.widgets;let i=index">
+                  <dm-widget *ngIf="i >= (fieldset.widgets.length*2/3)" [widget]="widget" [form]="form"></dm-widget>
+                </ng-container>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <div nz-col *ngFor="let widget of fieldset.widgets" [nzSpan]="widget.nzSpan">
+                <dm-widget [widget]="widget" [form]="form"></dm-widget>
+              </div>
+            </ng-container>
+          </div>
+        </fieldset>
+        <fieldset *ngIf="config && (!config['operationHead'] || config['operationHead'] === false)">
+          <div class="text-center">
+            <dm-operation [page]="this" [form]="form"></dm-operation>
+          </div>
+          <!--<button class="btn btn-primary" (click)="openModal()">弹窗测试</button>
+              <button class="btn btn-primary" (click)="openSelector()">弹窗选择</button>-->
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="col-lg-12" *ngIf="isWindow === true">
+      <div class="ibox-title">
+        <h5>{{title}}
+          <small class="m-l-sm">{{simpleTitle}}</small>
+        </h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ibox-content">
+        <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <fieldset>
+            <dm-operation [page]="this"></dm-operation>
+            <button class="btn btn-primary" (click)="openModal()">弹窗测试</button>
+          </fieldset>
+          <fieldset *ngFor="let fieldset of fieldsets" class="form-horizontal">
+            <legend *ngIf="fieldsets.length > 1">{{fieldset.name}}</legend>
+            <div class="form-group">
+              <dm-widget *ngFor="let widget of fieldset.widgets" [widget]="widget" [form]="form"></dm-widget>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

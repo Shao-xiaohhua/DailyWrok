@@ -1,0 +1,108 @@
+<nz-layout>
+  <nz-sider style="height: 100%;overflow-y: auto;" nzCollapsible [nzTrigger]="triggerTemplate"
+    [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'lg'">
+    <div class="logo">
+      <a href="javascript:;">
+        <img src="../assets/images/logo.png" alt="">
+        <h1>Homolo</h1>
+      </a>
+    </div>
+    <!--左侧菜单导航-->
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed"
+      *ngIf="menu && menu.children && menu.children.length > 0">
+      <ng-container *ngFor="let item of menu.children; let i = index">
+        <li *ngIf="item.children && item.children.length === 0" nz-menu-item nz-tooltip nzPlacement="right"
+          [nzTitle]="isCollapsed ? item.name : ''" [nzSelected]="item.active" (click)="menuItemClick(item)">
+          <span title>
+            <i nz-icon [type]="item.icon || 'ordered-list'"></i>
+            <span class="nav-text">{{item.name}}</span>
+          </span>
+        </li>
+        <li *ngIf="item.children && item.children.length > 0" nz-submenu [nzOpen]="item.open"  (click)="closeOpen(i)">
+          <span title>
+            <i nz-icon [type]="item.icon || 'ordered-list'"></i>
+            <span class="nav-text">{{item.name}}</span></span>
+          <ul>
+            <li nz-menu-item [nzSelected]="inerItem.active" *ngFor="let inerItem of item.children"
+              (click)="menuItemClick(inerItem)">
+              <span class="nav-text">{{inerItem.name}}</span>
+            </li>
+          </ul>
+        </li>
+      </ng-container>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; padding:0; min-width: 500px;">
+      <!-- 后加 -->
+      <ul class="header-box clearfix">
+        <li class="header-list pull-left">
+          <i class="trigger" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'"
+            (click)="isCollapsed=!isCollapsed"></i>
+        </li>
+        <li class="header-list pull-right">
+          <nz-dropdown nzPlacement="bottomRight" class="pull-right">
+            <div style="max-width: 250px;" class="alain-default__nav-item d-flex align-items-center px-sm" nz-dropdown>
+              <nz-avatar [nzSrc]="avatar" nzSize="small" class="mr-sm header-image"></nz-avatar>
+              <ng-container *ngIf="currentUser">
+                  {{currentUser.nickName ? currentUser.nickName : currentUser.userName}}
+              </ng-container>
+            </div>
+            <div nz-menu class="width-sm">
+              <div nz-menu-item routerLink="/workbench/usercenter"><i nz-icon type="user" class="mr-sm"></i>
+                个人中心
+              </div>
+              <div nz-menu-item routerLink="/workbench/userset/basic"><i nz-icon type="setting" class="mr-sm"></i>
+                个人设置
+              </div>
+              <div nz-menu-item><i nz-icon type="close-circle" class="mr-sm"></i>
+                触发报错
+              </div>
+        <li nz-menu-divider></li>
+        <div (click)="logOut()" nz-menu-item><i nz-icon type="logout" class="mr-sm"></i>
+          退出登录
+        </div>
+        </div>
+        </nz-dropdown>
+        </li>
+        <li class="header-list-message pull-right">
+          <nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomRight'" [(nzVisible)]="showNotifyStatus">
+            <a nz-dropdown class="show-notify">
+              <i nz-icon type="bell" theme="outline"></i>
+              <nz-badge [nzCount]="messageNumber" class="message-call"></nz-badge>
+            </a>
+            <ul nz-menu class="notify-box">
+              <hf-header-notify #childNotify (checked)="checkedBack($event)" (checkedOther)="checkedBackOther($event)">
+              </hf-header-notify>
+            </ul>
+          </nz-dropdown>
+        </li>
+        <li class="header-list pull-right" nz-tooltip nzTitle="prompt text" nzPlacement="bottom">
+          <a href="https://www.baidu.com/" target="_blank">
+            <i nz-icon type="question-circle" theme="outline"></i></a>
+        </li>
+        <li class="header-list-other pull-right">
+          <i class="search-icon" nz-icon type="search" (click)="changeInput()"></i>
+          <input #inputElementShow [class.active]="showInput" type="text" class="search-input" placeholder="站内搜索"
+            (blur)="blurInput()">
+        </li>
+      </ul>
+
+      <!-- 后加 -->
+    </nz-header>
+    <nz-content style="padding: 0 16px;height: calc(100% - 133px);overflow-y: auto;">
+      <router-outlet></router-outlet>
+    </nz-content>
+    <nz-footer style="text-align: center; min-width: 500px;">
+      Homolo Model ©2019 Implement By Angular
+    </nz-footer>
+  </nz-layout>
+</nz-layout>
+<ng-template #trigger>
+  <i nz-icon type="up"></i>
+</ng-template>
+<nz-drawer [nzVisible]="visible" nzPlacement="right" nzTitle="整体风格设置" nzWidth="300px" (nzOnClose)="close()">
+</nz-drawer>
+<div class="setting-drawer__handle" [ngClass]="{'setting-drawer__handle-opened': visible}" (click)="toggle()">
+  <i nz-icon [type]="!visible ? 'setting' : 'close'" class="setting-drawer__handle-icon"></i>
+</div>

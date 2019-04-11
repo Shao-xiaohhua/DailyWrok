@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/homolo-datamodel",
+  "lib": { 
+    "entryFile": "src/public_api.ts",
+    "umdModuleIds": {
+      "ng-zorro-antd": "ng-zorro-antd"
+    }
+
+  }
+}

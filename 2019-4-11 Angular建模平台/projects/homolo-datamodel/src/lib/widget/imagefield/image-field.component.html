@@ -1,0 +1,44 @@
+<div [formGroup]="form" [class.has-error]="!isValid && (isDirty || isTouched)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <div class='file-upload'>
+        <div class="upload">
+          <nz-upload nzListType="picture-card"
+          [nzAction]="uploader?.uploadUrl"
+          [nzHeaders]="uploader?.headers"
+          [nzLimit]="$widget.array ? 0: 1"
+          [nzShowButton]="showButton"
+          [nzShowUploadList]="showUploadList"
+          [nzPreview]="handlePreview"
+          [nzBeforeUpload]="beforeUpload"
+          nzMultiple
+          [(nzFileList)]="fileList" (nzChange)="nzChange()" (nzRemove)="nzRemove()">
+            <i nz-icon type="plus"></i>
+            <div class="ant-upload-text">上传</div>
+          </nz-upload>
+        </div>
+        <div>
+          <input type="hidden" [(ngModel)]="form.value[$widget.fieldName]"  [formControlName]="$widget.fieldName" [id]="$widget.fieldName" />
+        </div>
+      </div>
+      <nz-form-explain *ngIf="!isValid && (isDirty || isTouched)">{{$widget.label}}不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-modal
+    [nzVisible]="previewVisible"
+    [nzContent]="previewContent"
+    [nzFooter]="null"
+    (nzOnCancel)="previewVisible = false"
+  >
+    <ng-template #previewContent>
+      <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+      <!-- <nz-carousel [nzEffect]="'fade'">
+        <div nz-carousel-content *ngFor="let index of images">
+          <img [src]="index" [ngStyle]="{ width: '100%' }" />
+        </div>
+      </nz-carousel> -->
+    </ng-template>
+  </nz-modal>
+</div>

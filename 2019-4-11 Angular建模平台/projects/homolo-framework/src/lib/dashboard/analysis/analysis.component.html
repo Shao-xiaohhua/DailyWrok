@@ -1,0 +1,122 @@
+<div class="analysis-wrap">
+  <div nz-row nzGutter="16" class="basics-wrap">
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="6">
+      <div class="chart-item" id="histogram"></div>
+    </div>
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="6">
+      <div class="chart-item" id="bar"></div>
+    </div>
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="6">
+      <div class="chart-item" id="ring"></div>
+    </div>
+    <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="6">
+      <div class="chart-item" id="line"></div>
+    </div>
+  </div>
+  <div class="hom-center-inner">
+    <nz-tabset [nzTabBarExtraContent]="extraTemplate"
+      [nzTabBarStyle]="{ 'padding-left': '20px', 'padding-right': '20px' }">
+      <nz-tab nzTitle="销售额" [nzForceRender]="true" nz-row>
+        <div class="saleroom-wrap">
+          <div class="seleroom-chart" nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
+            <div class="title">销售额趋势</div>
+            <div class="chart-sele" id="sele"></div>
+          </div>
+          <div class="seleroom-content" nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+            <div class="title">门店销售额排名</div>
+            <ul class="seleroom-msg-wrap">
+              <li class="item">
+                <span class="item-count active">1</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count active">2</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count active">3</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count">4</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count">5</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count">6</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count">7</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="访问量" [nzForceRender]="true" nz-row>
+        <div class="saleroom-wrap">
+          <div class="seleroom-chart" nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
+            <div class="title">访问量趋势</div>
+            <div class="chart-sele" id="visit"></div>
+          </div>
+          <div class="seleroom-content" nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+            <div class="title">门店访问量排名</div>
+            <ul class="seleroom-msg-wrap">
+              <li class="item">
+                <span class="item-count active">1</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count active">2</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count active">3</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count">4</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count">5</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count">6</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+              <li class="item">
+                <span class="item-count">7</span>
+                <span class="item-name">工专路 0 号店</span>
+                <span>323,234</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+    <ng-template #extraTemplate>
+      <nz-range-picker [nzRanges]="ranges" [nzShowTime]="{ nzFormat: 'HH:mm' }" nzFormat="yyyy-MM-dd HH:mm"
+        [nzPlaceHolder]="['开始时间', '结束时间']">
+      </nz-range-picker>
+    </ng-template>
+  </div>
+</div>

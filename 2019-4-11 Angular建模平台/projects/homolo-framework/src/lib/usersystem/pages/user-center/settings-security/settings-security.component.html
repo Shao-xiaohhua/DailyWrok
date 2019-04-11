@@ -1,0 +1,76 @@
+<div class="set-security">
+  <div class="safe-item clearfix">
+    <div class="safe-content pull-left">
+      <div class="content-title">账户密码</div>
+      <div class="content-main">当前密码强度：<div class="content-color">强</div>
+      </div>
+    </div>
+    <a class="safe-link pull-right" href="javascript:;" (click)="showModal()">修改</a>
+  </div>
+  <div class="safe-item clearfix">
+    <div class="safe-content pull-left">
+      <div class="content-title">密保手机</div>
+      <div class="content-main">已绑定手机：138****8293</div>
+    </div>
+    <a class="safe-link pull-right" href="javascript:;">修改</a>
+  </div>
+  <div class="safe-item clearfix">
+    <div class="safe-content pull-left">
+      <div class="content-title">密保问题</div>
+      <div class="content-main">未设置密保问题，密保问题可有效保护账户安全</div>
+    </div>
+    <a class="safe-link pull-right" href="javascript:;">设置</a>
+  </div>
+  <div class="safe-item clearfix">
+    <div class="safe-content pull-left">
+      <div class="content-title">备用邮箱</div>
+      <div class="content-main">已绑定邮箱：ant***sign.com</div>
+    </div>
+    <a class="safe-link pull-right" href="javascript:;">修改</a>
+  </div>
+  <div class="safe-item clearfix">
+    <div class="safe-content pull-left">
+      <div class="content-title">MFA 设备</div>
+      <div class="content-main">未绑定 MFA 设备，绑定后，可以进行二次确认</div>
+    </div>
+    <a class="safe-link pull-right" href="javascript:;">绑定</a>
+  </div>
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="修改密码" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <div class="pse-item">
+      <div class="old-psw">请输入旧密码</div>
+      <nz-input-group [nzPrefix]="prefixLock" [nzSuffix]="newPaw">
+        <input class="psw-input" [class.active]="oldError" [type]="newPawVisible?'text':'password'" nz-input
+          placeholder="旧密码" [(ngModel)]="oldPassword" (input)="oldError=false">
+      </nz-input-group>
+      <nz-form-explain *ngIf="oldError"><span class="eror-text">{{oldErrorContent}}</span></nz-form-explain>
+      <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+      <ng-template #newPaw>
+        <i nz-icon [nzType]="newPawVisible? 'eye-invisible':'eye'" (click)="newPawVisible = !newPawVisible"></i>
+      </ng-template>
+    </div>
+    <div class="pse-item">
+      <div class="old-psw">请输入新密码</div>
+      <nz-input-group [nzPrefix]="newfixLock" [nzSuffix]="comPaw">
+        <input class="psw-input" [class.active]="newError" [type]="comPawVisible?'text':'password'" nz-input
+          placeholder="新密码" [(ngModel)]="newPassword" (input)="newError=false">
+      </nz-input-group>
+      <nz-form-explain *ngIf="newError"><span class="eror-text">{{newErrorContent}}</span></nz-form-explain>
+      <ng-template #newfixLock><i nz-icon type="lock"></i></ng-template>
+      <ng-template #comPaw>
+        <i nz-icon [nzType]="comPawVisible? 'eye-invisible':'eye'" (click)="comPawVisible = !comPawVisible"></i>
+      </ng-template>
+    </div>
+    <div class="pse-item">
+      <div class="old-psw">请重复新密码</div>
+      <nz-input-group [nzPrefix]="otherfixLock" [nzSuffix]="otherPaw">
+        <input class="psw-input" [class.active]="otherError" [type]="otherPawVisible?'text':'password'" nz-input placeholder="新密码"
+         [(ngModel)]="repeatPassword" (input)="otherError=false">
+      </nz-input-group>
+      <nz-form-explain *ngIf="otherError"><span class="eror-text">{{otherErrorContent}}</span></nz-form-explain>
+      <ng-template #otherfixLock><i nz-icon type="lock"></i></ng-template>
+      <ng-template #otherPaw>
+        <i nz-icon [nzType]="otherPawVisible? 'eye-invisible':'eye'" (click)="otherPawVisible = !otherPawVisible"></i>
+      </ng-template>
+    </div>
+  </nz-modal>
+</div>

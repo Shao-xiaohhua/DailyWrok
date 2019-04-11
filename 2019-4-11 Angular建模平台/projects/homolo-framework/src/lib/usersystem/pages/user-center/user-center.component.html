@@ -1,0 +1,65 @@
+<div class="user-center">
+  <div class="user-message">
+    <img class="user-image" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" alt="">
+    <div class="user-name">
+      <i nz-icon type="user" theme="outline"></i>
+      用户名:
+      <div class="name-content">{{userInfo?.userName}}</div>
+    </div>
+    <div class="user-name">
+      <i nz-icon type="idcard" theme="outline"></i>
+      用户ID:
+      <div class="name-content">{{userInfo?.userId}}</div>
+    </div>
+    <div class="user-name">
+      <i nz-icon type="usergroup-add" theme="outline"></i>
+      昵称:
+      <div class="name-content">{{userInfo?.nickName}}</div>
+    </div>
+    <div class="user-name">
+      <i nz-icon type="mail" theme="outline"></i>
+      邮箱:
+      <div class="name-content">{{userInfo?.email}}</div>
+    </div>
+    <div class="user-name">
+      <i nz-icon type="phone" theme="outline"></i>
+      电话号码:
+      <div class="name-content">{{userInfo?.mobile}}</div>
+    </div>
+  </div>
+  <div class="user-message">
+    <div class="user-name">标签</div>
+    <div class="user-tag">
+      <nz-tag *ngFor="let tag of tags; let i = index;" [nzMode]="i === 0 ? 'default' : 'closeable'" (nzAfterClose)="handleClose(tag)">
+        {{ sliceTagName(tag) }}
+      </nz-tag>
+      <nz-tag *ngIf="!inputVisible" class="editable-tag" nzNoAnimation (click)="showInput()">
+        <i nz-icon type="plus"></i>
+      </nz-tag>
+      <input #inputElement nz-input nzSize="small" *ngIf="inputVisible" type="text" [(ngModel)]="inputValue" style="width: 78px;"
+        (blur)="handleInputConfirm()" (keydown.enter)="handleInputConfirm()">
+    </div>
+  </div>
+  <div class="user-message">
+    <div class="user-name">团队</div>
+    <div class="team-wrapper clearfix">
+      <div class="team-content pull-left">
+        <i nz-icon type="alipay-circle" theme="outline" class="team-icon-one pull-left"></i>
+        <div class="team-title pull-left">科学搬砖组</div>
+      </div>
+      <div class="team-content pull-left">
+        <i nz-icon type="taobao-circle" theme="outline" class="team-icon-two pull-left"></i>
+        <div class="team-title pull-left">巴拉巴拉小魔仙</div>
+      </div>
+      <div class="team-content pull-left">
+        <i nz-icon type="weibo-circle" theme="outline" class="team-icon-three pull-left"></i>
+        <div class="team-title pull-left">中二少女团</div>
+      </div>
+      <div class="team-content pull-left">
+        <i nz-icon type="codepen-circle" theme="outline" class="team-icon-four pull-left"></i>
+        <div class="team-title pull-left">程序员日常</div>
+      </div>
+    </div>
+  </div>
+
+</div>

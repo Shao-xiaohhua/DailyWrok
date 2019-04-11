@@ -1,0 +1,78 @@
+<div class="hom-renderer">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item>
+      <a [routerLink]="['/']">首页</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      {{business.title || '数据列表'}}
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <div class="hom-renderer-content">
+    <h2 class="h2" *ngIf="business.title">{{business.title}}</h2>
+    <h2 class="h2" *ngIf="!business.title">数据列表</h2>
+  <div>
+    <div class="ibox-content">
+      <dm-operation [page]="this"></dm-operation>
+      <nz-table
+        style="margin-top: 30px;"
+        #dmGrid
+        nzShowSizeChanger
+        [nzScroll]="{x:calcTableWidth() + '%'}"
+        [nzData]="items"
+        [nzShowTotal]="totalTemplate"
+        nzFrontPagination="false"
+        [nzShowPagination]="true"
+        [nzFrontPagination]="false"
+        [nzLoading]="loading"
+        [nzTotal]="total"
+        [(nzPageIndex)]="pageIndex"
+        [(nzPageSize)]="pageSize"
+        (nzPageIndexChange)="query({})"
+        (nzPageSizeChange)="query({})">
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
+          <tr>
+            <th nzWidth="20px" nzLeft="0px"></th>
+            <ng-container *ngFor="let column of view.columns">
+              <th [(nzSort)]="column.nzSort" [nzShowSort]="column.sortable" [nzSortKey]="column.field"
+                [nzWidth]="calcColumnWidth(column)">
+                <span (click)="title_sort(column)">{{ column.header }}</span>
+              </th>
+            </ng-container>
+            <th *ngIf="view.businessColumnVisible" nzWidth="120px" nzRight="0px">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dmGrid.data">
+            <td nzShowCheckbox [(nzChecked)]="item.checked" (nzCheckedChange)="refreshStatus($event, item)"></td>
+            <td *ngFor="let column of view.columns">
+              <div (dblclick)="entityClick(item)">{{ item[column.field] }}</div>
+            </td>
+            <td *ngIf="view.businessColumnVisible" nzRight="0px">
+              <ng-container *ngIf="getBusinessColumnOps(item) && getBusinessColumnOps(item).length >= 1">
+                <a (click)="entityOperationsClick(getBusinessColumnOps(item)[0], item)">{{ getBusinessColumnOps(item)[0].name }}</a>
+              </ng-container>
+              <ng-container *ngIf="getBusinessColumnOps(item) && getBusinessColumnOps(item).length == 2">
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="entityOperationsClick(getBusinessColumnOps(item)[1], item)">{{ getBusinessColumnOps(item)[1].name }}</a>
+              </ng-container>
+              <ng-container *ngIf="getBusinessColumnOps(item) && getBusinessColumnOps(item).length > 2">
+                <nz-divider nzType="vertical"></nz-divider>
+                <nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomRight'">
+                  <a nz-dropdown>更多>></a>
+                  <ul nz-menu>
+                    <ng-container *ngFor="let op of getBusinessColumnOps(item); let i = index ">
+                      <li nz-menu-item *ngIf="i >= 1"><a (click)="entityOperationsClick(op, item)">{{ op.name }}</a>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </nz-dropdown>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <ng-template #totalTemplate let-total>
+        共 {{total}} 条数据
+      </ng-template>
+  </div>
+</div>

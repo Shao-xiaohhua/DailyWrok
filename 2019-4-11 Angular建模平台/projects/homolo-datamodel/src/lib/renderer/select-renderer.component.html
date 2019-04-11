@@ -1,0 +1,61 @@
+<!--select modal-->
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+  nzWidth="800" (nzOnCancel)="closeModal()">
+  <ng-template #modalTitle>
+    <h4 class="modal-title">{{ type.getDisplayAs() }}选择</h4>
+  </ng-template>
+  <ng-template #modalContent>
+    <div class="row hom-renderer">
+      <div class="hom-renderer-content" *ngIf="view.conditions.length > 0; then conditionBlock; else emptyBlock"></div>
+      <ng-template #emptyBlock>没有设置查询条件!</ng-template>
+      <ng-template #conditionBlock>
+        <form novalidate nz-form  [nzLayout]="nzLayout" class="advanced-form">
+            <div nz-row nzGutter="24">
+              <dm-widget nz-col [nzSpan]="nzSpan" *ngFor="let widget of widgets" [widget]="widget" [form]="form"  [style.display]="widget.show ? 'block' : 'none'"></dm-widget>
+            </div>
+            <div nz-row nzGutter="24" style="text-align: right;margin-bottom: 10px;">
+              <div nz-col [nzSpan]="24">
+                <button nz-button [nzType]="'primary'" (click)="doSearch()" style="margin-right: 8px;">查询</button>
+                <button nz-button (click)="doReset()" style="margin-right: 5px;">重置</button>
+                <a (click)="expandClick();expandForm=!expandForm">
+                  {{expandForm ? '收起' : '展开'}}
+                  <i class="anticon" [class.anticon-down]="!expandForm" [class.anticon-up]="expandForm"></i>
+                </a>
+              </div>
+            </div>
+        </form>
+      </ng-template>
+      <nz-table #dmGrid nzShowSizeChanger [nzScroll]="{ x: calcTableWidth() + '%' }" [nzData]="items" nzSize="small"
+        nzFrontPagination="false" [nzShowPagination]="true" [nzFrontPagination]="false" [nzShowTotal]="totalTemplate"
+        [nzLoading]="loading" [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
+        (nzPageIndexChange)="query({})" (nzPageSizeChange)="query({})">
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
+          <tr>
+            <th nzWidth="20px" nzLeft="0px"></th>
+            <ng-container *ngFor="let column of view.columns">
+              <th [(nzSort)]="column.nzSort" [nzShowSort]="column.sortable" [nzSortKey]="column.field"
+                [nzWidth]="calcColumnWidth(column)">
+                <span (click)="title_sort(column)">{{ column.header }}</span>
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dmGrid.data">
+            <td nzShowCheckbox [(nzChecked)]="item.checked" (nzCheckedChange)="refreshStatus($event, item)"></td>
+            <td *ngFor="let column of view.columns">
+              <div (dblclick)="entityClick(item)">{{ item[column.field] }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <ng-template #totalTemplate let-total>
+        共 {{ total }} 条数据
+      </ng-template>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="doConfirm()">确定</button>
+    <button nz-button nzType="default" (click)="closeModal()">关闭</button>
+  </ng-template>
+</nz-modal>

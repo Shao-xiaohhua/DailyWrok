@@ -1,0 +1,12 @@
+<div [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+      <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+        <nz-input-group nzCompact style="display: flex;">
+          <input type="text" nz-input placeholder="最小值" style="flex: 1; text-align: center;">
+          <input type="text" disabled nz-input placeholder="~" style="width: 30px; border-left: 0px; pointer-events: none; background-color: rgb(255, 255, 255);">
+          <input type=" text" nz-input placeholder="最大值" style="flex: 1; text-align: center; border-left: 0px;">
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  </div>

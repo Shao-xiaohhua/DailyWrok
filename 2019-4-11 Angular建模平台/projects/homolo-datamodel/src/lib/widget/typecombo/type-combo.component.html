@@ -1,0 +1,24 @@
+<div [formGroup]="form" [class.has-error]="!isValid && (isDirty || isTouched)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <nz-select nzAllowClear  style="width: 100%;" nzShowSearch nzPlaceHolder="请选择" [(ngModel)]="form.value[$widget.fieldName]"
+        [ngModelOptions]="{standalone: true}"
+        (ngModelChange)="setValue();" (nzOnSearch)="filter($event)" [nzMode]="$widget.array? 'multiple' : 'default'">
+        <ng-container *ngIf="schema && getModuleById(schema + '')">
+          <nz-option *ngFor="let type of getModuleById(schema + '').types" [nzLabel]="type.displayAs + '(' + type.name + ')'" [nzValue]="type.id" nzCustomContent="true">{{ type.displayAs + '(' + type.name + ')' }}</nz-option>
+        </ng-container>
+        <ng-container *ngIf="!schema">
+            <nz-option-group *ngFor="let module of modules" [nzLabel]="module.displayAs + '(' + module.name + ')'">
+              <nz-option *ngFor="let type of module.types" [nzLabel]="type.displayAs + '(' + type.name + ')'" [nzValue]="type.id" nzCustomContent="true">{{ type.displayAs + '(' + type.name + ')' }}</nz-option>
+            </nz-option-group>
+        </ng-container>
+        <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+          <i nz-icon type="loading" class="loading-icon"></i> 正在加载...
+        </nz-option>
+      </nz-select>
+      <input type="hidden" [(ngModel)]="form.value[$widget.fieldName]" [id]="$widget.fieldName" [formControlName]="$widget.fieldName"/>
+      <nz-form-explain *ngIf="!isValid && (isDirty || isTouched)">{{$widget.label}}不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+</div>

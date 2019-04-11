@@ -1,0 +1,57 @@
+<nz-tabset class="notify-content" [nzTabBarGutter]="0">
+  <nz-tab [nzTitle]="'通知（'+newObj.noticeList.length+'）'">
+    <div class="notify-notice">
+      <div class="notice-item clearfix" [class.active]="item.remove" *ngFor="let item of newObj.noticeList;let i = index"
+        (click)="removeNotice(i)">
+        <div class="notice-icon pull-left" [ngStyle]="{'color': item.color}">
+          <i nz-icon [type]="item.icon" theme="outline"></i>
+        </div>
+        <div class="notice-detail pull-right">
+          <div class="notice-title">{{item.title}}</div>
+          <div class="notice-time">{{item.time}}</div>
+        </div>
+      </div>
+      <div class="notice-botton clearfix" *ngIf="newObj.noticeList.length">
+        <div class="clear-message pull-left" (click)="clearNotice()">清空通知</div>
+        <div class="clear-message pull-left">查看更多</div>
+      </div>
+    </div>
+    <div class="none-message" *ngIf="newObj.noticeList.length === 0">没有任何通知</div>
+  </nz-tab>
+  <nz-tab [nzTitle]="'消息（'+newObj.messageList.length+'）'">
+    <div class="notify-notice">
+      <div class="notice-item clearfix" [class.active]="item.remove" *ngFor="let item of newObj.messageList;let i = index"
+        (click)="removeMessage(i)">
+        <div class="notice-icon pull-left">
+          <img class="message-image" [src]="item.url" alt="">
+        </div>
+        <div class="notice-detail pull-right">
+          <div class="notice-title">{{item.title}}</div>
+          <div class="notice-time">{{item.content}}</div>
+          <div class="notice-time">{{item.time}}</div>
+        </div>
+      </div>
+      <div class="notice-botton clearfix" *ngIf="newObj.messageList.length">
+        <div class="clear-message pull-left" (click)="clearMessage()">清空消息</div>
+        <div class="clear-message pull-left">查看更多</div>
+      </div>
+    </div>
+    <div class="none-message" *ngIf="newObj.messageList.length === 0">没有任何消息</div>
+  </nz-tab>
+  <nz-tab [nzTitle]="'待办（'+newObj.waitList.length+'）'">
+    <div class="notify-notice">
+      <div class="notice-item" [class.active]="item.remove" *ngFor="let item of newObj.waitList;let i = index" (click)="removeWait(i)">
+        <div class="wait-content clearfix">
+          <div class="wait-title pull-left">{{item.title}}</div>
+          <div class="wait-type pull-right" [ngClass]="{'red':item.typeStatus === 'start','yellow':item.typeStatus === 'done','blue':item.typeStatus === 'doing'}">{{item.type}}</div>
+        </div>
+        <div class="notice-time">{{item.time}}</div>
+      </div>
+      <div class="notice-botton clearfix" *ngIf="newObj.waitList.length">
+        <div class="clear-message pull-left" (click)="clearWait()">清空待办</div>
+        <div class="clear-message pull-left">查看更多</div>
+      </div>
+    </div>
+    <div class="none-message" *ngIf="newObj.waitList.length === 0">没有任何待办</div>
+  </nz-tab>
+</nz-tabset>

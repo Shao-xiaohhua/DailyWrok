@@ -1,0 +1,18 @@
+<ng-container *ngIf="page !== null">
+  <nz-button-group>
+    <span *ngFor="let operation of operations">
+      <!-- 如果有表单,表单验证过才能执行 -->
+      <button *ngIf="form" [disabled]="form.invalid" nz-button nzType="primary" nzSize="default" (click)="onOpClick(operation.name)">{{operation.name}}</button>
+      <ng-container *ngIf="!form">
+        <ng-container *ngIf="!page.view.businessColumnVisible">
+          <button [disabled]="operation.disabled" nz-button nzType="primary" nzSize="default" (click)="onOpClick(operation.name)">{{operation.name}}</button>
+        </ng-container>
+        <ng-container *ngIf="page.view.businessColumnVisible && operation.mode === 1">
+          <button [disabled]="operation.disabled" nz-button nzType="primary" nzSize="default" (click)="onOpClick(operation.name)">{{operation.name}}</button>
+        </ng-container>
+      </ng-container>
+    </span>
+  </nz-button-group>
+  &nbsp;&nbsp;<button *ngIf="page.viewInfo.refreshable" nz-button nzType="default" nzSize="default" (click)="page.refresh()">刷新</button>
+  &nbsp;&nbsp;<button *ngIf="page.viewInfo.closable" nz-button nzType="default"  nzSize="default" (click)="page.close()">返回</button>&nbsp;&nbsp;
+</ng-container>

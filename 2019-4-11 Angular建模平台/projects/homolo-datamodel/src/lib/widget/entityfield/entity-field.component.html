@@ -1,0 +1,28 @@
+<div [formGroup]="form" [class.has-error]="!isValid && (isDirty || isTouched)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <div class="input-group" [class.input-readonly]="$widget.readonly">
+        <ul class="input-group-multi" *ngIf="form.value[$widget.fieldName] && entityList.length > 0">
+          <li class="input-group-item" *ngFor="let entity of entityList">
+            <span>{{entity.name}} <i nz-icon [nzType]="'close-circle'" style="color:#1890ff;"  (click)="removeEntity(entity.id)" *ngIf="!$widget.readonly"></i></span>
+          </li>
+        </ul>
+        <span class="input-group-btn" style="vertical-align: top">
+          <button nz-button [nzSize]="'default'" nzType="default"  (click)="doSelectEntity()" [attr.disabled]="$widget.readonly ? '' : null">
+            <ng-container *ngIf="array; then multi else single"></ng-container>
+            <ng-template #multi>
+              <i nz-icon [nzType]="'plus'"></i> 添加
+            </ng-template>
+            <ng-template #single>
+              <i nz-icon [nzType]="'setting'"></i> 选择
+            </ng-template>
+          </button>
+        </span>
+      </div>
+      <div #selectContainer></div>
+      <input type="hidden" [(ngModel)]="form.value[$widget.fieldName]" [id]="$widget.fieldName" [formControlName]="$widget.fieldName" />
+      <nz-form-explain *ngIf="!isValid && (isDirty || isTouched)">{{$widget.label}}不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+</div>

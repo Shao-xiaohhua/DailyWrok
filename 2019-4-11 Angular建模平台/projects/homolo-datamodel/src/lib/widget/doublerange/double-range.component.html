@@ -1,0 +1,12 @@
+<div class="doublerange" [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <nz-input-group nzCompact [formGroup]="form">
+          <input [(ngModel)]="arr[0]" (blur)="onBlur()" [formControlName]="$widget.fieldName" type="number" nz-input placeholder="最小值" style="width:40%; text-align: center; border-radius: 0;">
+          <input type="text" disabled nz-input placeholder="~" style="width: 20%; border-left: 0px; pointer-events: none; background-color: rgb(255, 255, 255);">
+          <input [(ngModel)]="arr[1]" (blur)="onBlur()" [formControlName]="$widget.fieldName" type="number" nz-input placeholder="最大值" style="width: 40%; text-align: center; border-left: 0px; border-radius: 0;">
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+</div>

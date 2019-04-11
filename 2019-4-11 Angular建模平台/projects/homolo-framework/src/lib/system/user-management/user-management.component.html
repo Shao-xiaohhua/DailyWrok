@@ -1,0 +1,418 @@
+<div class="user-management">
+  <div class="user-management-inner">
+    <h2 class="h2">用户管理</h2>
+    <div class="btn-wrap">
+      <button class="mr-5" nz-button nzType="primary" (click)="addUser()">
+        <i nz-icon type="poweroff"></i>添加
+      </button>
+      <button class="mr-5" nz-button nzType="primary" (click)="editUser()">
+        <i nz-icon type="poweroff"></i>编辑
+      </button>
+      <button class="mr-5" nz-button nzType="primary">
+        <i nz-icon type="poweroff"></i>修改密码
+      </button>
+      <button class="mr-5" nz-button nzType="primary" (click)="deleteUser()">
+        <i nz-icon type="poweroff"></i>删除
+      </button>
+      <button class="mr-5" nz-button nzType="primary">
+        <i nz-icon type="poweroff"></i>重置
+      </button>
+      <button class="mr-5" nz-button nzType="primary">
+        <i nz-icon type="poweroff"></i>重新发送邮件
+      </button>
+      <button class="mr-5" nz-button nzType="primary">
+        <i nz-icon type="poweroff"></i>刷新
+      </button>
+    </div>
+    <div class="userList">
+      <nz-table nzSize="small" #rowSelectionTable nzShowPagination nzShowSizeChanger [nzFrontPagination]="false"
+        [nzPaginationPosition]="'bottom'" [nzData]="listOfAllData" [nzTotal]="listTotal" [nzHideOnSinglePage]="true">
+        <thead>
+          <tr>
+            <th></th>
+            <th>用户名</th>
+            <th>昵称</th>
+            <th>移动电话</th>
+            <th>邮箱</th>
+            <th>禁用</th>
+            <th>锁定</th>
+            <th>登陆后修改</th>
+            <th>注册日期</th>
+            <th>角色</th>
+            <th>分组</th>
+            <th>描述</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of rowSelectionTable.data">
+            <td nzShowCheckbox [nzChecked]="checkboxId === data.id" (nzCheckedChange)="checkboxId = data.id"></td>
+            <td>{{ data.userName }}</td>
+            <td>{{ data.nickName }}</td>
+            <td>{{ data.mobile }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{ data.disabled ? '是' : '否' }}</td>
+            <td>{{ data.lock ? '是' : '否' }}</td>
+            <td>{{ data.changePasswordAfterLogin ? '是' : '否' }}</td>
+            <td>{{ data.regDate | date:"MM年dd月yy日" }}</td>
+            <td>{{ data.roles.length ? data.roles[0].name : '' }}</td>
+            <td>{{ data.groups }}</td>
+            <td>{{ data.description }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>
+<nz-modal class="user-management-modal" nzWidth="600" [(nzVisible)]="addUserShow" nzTitle="添加用户" (nzOnCancel)="handleCanceladd()"
+  (nzOnOk)="handleOkadd()">
+  <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+    <nz-tab nzTitle="常规">
+      <div nz-row nzGutter="16">
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">用户名:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="addUserParam.userName" name="userName" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">昵称:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="addUserParam.nickName" name="nickName" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">密码:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="addUserParam.password" name="password" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">民族:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="addUserParam.nationality" name="nationality" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">电子邮箱:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="addUserParam.email" name="email" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">时区:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="addUserParam.timeZone" name="timeZone" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">邮政编码:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="addUserParam.zipCode" name="zipCode" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">状态:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <label nz-checkbox [(ngModel)]="addUserParam.disabled">禁用</label>
+              <label nz-checkbox [(ngModel)]="addUserParam.locked">锁定</label>
+              <div style="padding-top: 5px;">
+                <label nz-checkbox [(ngModel)]="addUserParam.changePasswordAfterLogin">登陆后修改密码</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">手机号码:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="addUserParam.mobile" name="mobile" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="24" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="3" class="input-lebel">描述:</div>
+            <div nz-col nzSpan="21" class="input-wrap">
+              <textarea rows="4" nz-input [(ngModel)]="addUserParam.description" name="description"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="账号">
+      <div>
+        <button (click)="addUserShowInput = true" nz-button nzType="default" nzSize="small" style="margin-right: 10px;">
+          添加账户
+        </button>
+        <button nz-button nzType="default" nzSize="small">移除账户</button>
+      </div>
+      <ul *ngIf="!addUserShowInput" class="user-list-wrap">
+        <li class="user-item">zhangsan1</li>
+        <li class="user-item">zhangsan2</li>
+        <li class="user-item">zhangsan3</li>
+        <li class="user-item">zhangsan4</li>
+      </ul>
+      <div *ngIf="addUserShowInput" class="add-user-box">
+        <h3>新增账号</h3>
+        <div nz-row style="margin-bottom: 10px;">
+          <div nz-col nzSpan="4" class="input-lebel">登录名:</div>
+          <div nz-col nzSpan="20" class="input-wrap">
+            <input nz-input />
+          </div>
+        </div>
+        <div nz-row style="margin-bottom: 10px;">
+          <div nz-col nzSpan="4" class="input-lebel">状态:</div>
+          <div nz-col nzSpan="20" class="input-wrap">
+            <input nz-input />
+          </div>
+        </div>
+        <div nz-row style="margin-bottom: 10px;">
+          <div nz-col nzSpan="4" class="input-lebel">类型:</div>
+          <div nz-col nzSpan="20" class="input-wrap">
+            <input nz-input />
+          </div>
+        </div>
+        <div nz-row style="margin-bottom: 10px;">
+          <div nz-col nzSpan="4" class="input-lebel">生效日期:</div>
+          <div nz-col nzSpan="20" class="input-wrap">
+            <input nz-input />
+          </div>
+        </div>
+        <div nz-row style="margin-bottom: 10px;">
+          <div nz-col nzSpan="4" class="input-lebel">失效日期:</div>
+          <div nz-col nzSpan="20" class="input-wrap">
+            <input nz-input />
+          </div>
+        </div>
+        <div nz-row style="margin-bottom: 10px;">
+          <div nz-col nzSpan="4" class="input-lebel">状态:</div>
+          <div nz-col nzSpan="20" class="input-wrap">
+            <input nz-input />
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <button (click)="addUserShowInput = false" style="margin-right: 10px;" nzSize="small" nz-button
+            nzType="default">
+            取消
+          </button>
+          <button (click)="addUserShowInput = false" nzSize="small" nz-button nzType="primary">
+            确定
+          </button>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="角色">
+      <div>
+        <button (click)="addRoleShow = true" nz-button nzType="default" nzSize="small" style="margin-right: 10px;">
+          增加角色
+        </button>
+        <button (click)="removeRoles()" nz-button nzType="default" nzSize="small">移除角色</button>
+        <nz-table *ngIf="!addRoleShow" style="margin-top: 10px;" #roleList nzSize="small" [nzData]="addRoleData"
+          [nzHideOnSinglePage]="true">
+          <tbody>
+            <tr *ngFor="let data of roleList.data">
+              <td nzShowCheckbox  [nzChecked]="delRoleId === data.id" (nzCheckedChange)="delRoleId = data.id"></td>
+              <td>{{ data.name }}</td>
+              <td>{{ data.description }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div *ngIf="addRoleShow" class="add-user-box">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input type="text" nz-input />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <i nz-icon type="search"></i>
+        </ng-template>
+        <nz-table style="margin-top: 10px;" #basicTable nzSize="small" [nzData]="roleData" [nzHideOnSinglePage]="true">
+          <thead>
+            <tr>
+              <th></th>
+              <th>名称</th>
+              <th>描述</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td nzShowCheckbox [nzChecked]="roleId === data.id" (nzCheckedChange)="roleId = data.id"></td>
+              <td>{{ data.name }}</td>
+              <td>{{ data.description }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <div style="text-align: right;padding: 10px 0;">
+          <button (click)="addRoleShow = false" style="margin-right: 10px;" nzSize="small" nz-button nzType="default">
+            取消
+          </button>
+          <button (click)="getRoleId()" nzSize="small" nz-button nzType="primary">
+            确定
+          </button>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="分组"></nz-tab>
+    <nz-tab nzTitle="备注"></nz-tab>
+  </nz-tabset>
+</nz-modal>
+<nz-modal nzWidth="600" [(nzVisible)]="editUserShow" nzTitle="编辑用户" (nzOnCancel)="handleCanceledit()"
+  (nzOnOk)="handleOkedit()">
+  <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+    <nz-tab nzTitle="常规">
+      <div nz-row nzGutter="16">
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">用户名:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="editUserParam.userName" name="userName" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">昵称:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="editUserParam.nickName" name="nickName" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">密码:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="editUserParam.password" name="password" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">民族:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="editUserParam.nationality" name="nationality" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">电子邮箱:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="editUserParam.email" name="email" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">时区:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="editUserParam.timeZone" name="timeZone" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">邮政编码:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="editUserParam.zipCode" name="zipCode" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">状态:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <label nz-checkbox [(ngModel)]="editUserParam.disabled">禁用</label>
+              <label nz-checkbox [(ngModel)]="editUserParam.locked">锁定</label>
+              <div style="padding-top: 5px;">
+                <label nz-checkbox [(ngModel)]="editUserParam.changePasswordAfterLogin">登陆后修改密码</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="6" class="input-lebel">手机号码:</div>
+            <div nz-col nzSpan="18" class="input-wrap">
+              <input nz-input [(ngModel)]="editUserParam.mobile" name="mobile" />
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="24" style="padding-bottom: 10px;">
+          <div nz-row>
+            <div nz-col nzSpan="3" class="input-lebel">描述:</div>
+            <div nz-col nzSpan="21" class="input-wrap">
+              <textarea rows="4" nz-input [(ngModel)]="editUserParam.description" name="description"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="账号"> </nz-tab>
+    <nz-tab nzTitle="角色">
+      <div>
+        <button (click)="editRoleShow = true" nz-button nzType="default" nzSize="small" style="margin-right: 10px;">
+          增加角色
+        </button>
+        <button (click)="editremoveRoles()" nz-button nzType="default" nzSize="small">移除角色</button>
+        <nz-table *ngIf="!editRoleShow" style="margin-top: 10px;" #editroleList nzSize="small" [nzData]="editRoleData"
+          [nzHideOnSinglePage]="true">
+          <tbody>
+            <tr *ngFor="let data of editroleList.data">
+              <td nzShowCheckbox  [nzChecked]="removeRoleId === data.id" (nzCheckedChange)="removeRoleId = data.id"></td>
+              <td>{{ data.name }}</td>
+              <td>{{ data.description }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div *ngIf="editRoleShow" class="add-user-box">
+        <nz-input-group [nzSuffix]="editSuffixIconSearch">
+          <input type="text" nz-input />
+        </nz-input-group>
+        <ng-template #editSuffixIconSearch>
+          <i nz-icon type="search"></i>
+        </ng-template>
+        <nz-table style="margin-top: 10px;" #editBasicTable nzSize="small" [nzData]="roleData" [nzHideOnSinglePage]="true">
+          <thead>
+            <tr>
+              <th></th>
+              <th>名称</th>
+              <th>描述</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of editBasicTable.data">
+              <td nzShowCheckbox [nzChecked]="editRoleId === data.id" (nzCheckedChange)="editRoleId = data.id"></td>
+              <td>{{ data.name }}</td>
+              <td>{{ data.description }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <div style="text-align: right;padding: 10px 0;">
+          <button (click)="editRoleShow = false" style="margin-right: 10px;" nzSize="small" nz-button nzType="default">
+            取消
+          </button>
+          <button (click)="getEditRoleId()" nzSize="small" nz-button nzType="primary">
+            确定
+          </button>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="分组"></nz-tab>
+    <nz-tab nzTitle="备注"></nz-tab>
+  </nz-tabset>
+</nz-modal>

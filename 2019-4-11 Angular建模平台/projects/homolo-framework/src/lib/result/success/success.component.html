@@ -1,0 +1,65 @@
+<div class="success-wrapper">
+  <div class="success-content">
+    <div class="success-main">
+      <div class="success-icon">
+        <i nz-icon type="check-circle" theme="outline"></i>
+      </div>
+      <div class="success-title">提交成功</div>
+      <div class="success-intro">提交结果页用于反馈一系列操作任务的处理结果， 如果仅是简单操作，使用 Message 全局提示反馈即可。 本文字区域可以展示简单的补充说明，如果有类似展示
+        “单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。</div>
+      <div class="success-card">
+        <div class="card-title">项目名称</div>
+        <div class="card-project clearfix">
+          <div class="project-content pull-left">
+            <span class="project-title">项目 ID：</span>
+            <span class="project-detail">23421</span>
+          </div>
+          <div class="project-content pull-left">
+            <span class="project-title">负责人：</span>
+            <span class="project-detail">曲丽丽</span>
+          </div>
+          <div class="project-content pull-left">
+            <span class="project-title">生效时间：</span>
+            <span class="project-detail">2016-12-12 ~ 2017-12-12</span>
+          </div>
+        </div>
+        <div class="card-step">
+          <nz-steps [nzCurrent]="1" nzProgressDot>
+            <nz-step nzTitle="创建项目" [nzDescription]="createDesc">
+              <ng-template #createDesc>
+                <div class="step-content">
+                  <div class="step-title">
+                    曲丽丽
+                    <i nz-icon type="dingding" class="ml-sm"></i>
+                  </div>
+                  <div class="step-title">2016-12-12 12:32</div>
+                </div>
+              </ng-template>
+            </nz-step>
+            <nz-step [nzTitle]="'部门初审'" [nzDescription]="checkedDesc">
+              <ng-template #checkedDesc>
+                <div class="step-content">
+                  <div class="step-title">
+                    周毛毛
+                    <i nz-icon type="dingding" class="ml-sm" style="color: #00a0e9;"></i>
+                  </div>
+                  <div class="step-title">
+                    <a>催一下</a>
+                  </div>
+                </div>
+              </ng-template>
+            </nz-step>
+            <nz-step nzTitle="财务复核"></nz-step>
+            <nz-step nzTitle="完成"></nz-step>
+          </nz-steps>
+        </div>
+      </div>
+      <div class="success-button">
+        <button nz-button [nzType]="'primary'">返回列表</button>
+        <button nz-button>查看项目</button>
+        <button nz-button>打 印</button>
+      </div>
+
+    </div>
+  </div>
+</div>

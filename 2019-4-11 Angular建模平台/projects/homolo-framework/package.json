@@ -1,0 +1,16 @@
+{
+  "name": "homolo-framework",
+  "version": "7.0.0",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/http": "^7.2.0",
+    "rxjs": "~6.3.3",
+    "ng-zorro-antd": "^7.0.3",
+    "crypto-js": "^3.1.9-1",
+    "jsencrypt": "^3.0.0-rc.1"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.homolo.org/repository/npm-hosted"
+  }
+}

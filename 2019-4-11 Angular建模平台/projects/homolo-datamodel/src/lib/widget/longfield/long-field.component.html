@@ -1,0 +1,9 @@
+<div [formGroup]="form" [class.has-error]="!isValid && (isDirty || isTouched)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName" [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null" [nzValidateStatus]="!isValid && (isDirty || isTouched) ? 'error' : ''">
+      <nz-input-number class="input-number" [formControlName]="$widget.fieldName" [id]="$widget.fieldName" [(ngModel)]="form.value[$widget.fieldName]" [nzStep]="1" [nzPlaceHolder]="$widget.tip" [nzMin]="config ? config['min']: '-2147483648'" [nzMax]="config ? config['max']: '2147483647'" [nzDisabled]="$widget.readonly"></nz-input-number>
+      <nz-form-explain *ngIf="!isValid && (isDirty || isTouched)">{{$widget.label}}不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+</div>

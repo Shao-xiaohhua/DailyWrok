@@ -1,0 +1,18 @@
+<div [formGroup]="form" [class.has-error]="!isValid && (isDirty || isTouched)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="isHorizontal ? labelSpan : null" [nzFor]="$widget.fieldName"
+      [nzRequired]="$widget.required">{{$widget.label}}</nz-form-label>
+    <nz-form-control [nzSpan]="isHorizontal ? fieldSpan : null">
+      <nz-select nzAllowClear style="width: 100%;" nzShowSearch nzPlaceHolder="请选择" [nzDisabled]="$widget.readonly"
+        [(ngModel)]="form.value[$widget.fieldName]"
+        (ngModelChange)="ngModelChange($event);" [nzFilterOption]="filter"
+        [nzMode]="$widget.array? 'multiple' : 'default'" [nzNotFoundContent]="'暂无数据'"
+        [(ngModel)]="form.value[$widget.fieldName]" [id]="$widget.fieldName"
+        [formControlName]="$widget.fieldName"
+        >
+        <nz-option *ngFor="let option of options" [nzLabel]="option.text" [nzValue]="option.id"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="!isValid && (isDirty || isTouched)">{{$widget.label}}不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+</div>

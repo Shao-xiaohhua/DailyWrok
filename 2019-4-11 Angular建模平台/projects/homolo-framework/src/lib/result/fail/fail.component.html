@@ -1,0 +1,24 @@
+<div class="fail-wrapper">
+  <div class="success-content">
+    <div class="success-main">
+      <div class="success-icon">
+        <i nz-icon type="close-circle" theme="outline"></i>
+      </div>
+      <div class="success-title">提交失败</div>
+      <div class="success-intro">请核对并修改以下信息后，再重新提交。</div>
+      <div class="success-card">
+        <div class="card-title">您提交的内容有如下错误：</div>
+        <div class="fail-reason">
+          <i class="fail-icon" nz-icon type="close-circle" theme="outline"></i>
+          您的账户已被冻结
+          <a class="fail-link" href="javascript:;">立即解冻 ></a>
+        </div>
+
+      </div>
+      <div class="success-button">
+        <button nz-button [nzType]="'primary'">返回修改</button>
+      </div>
+
+    </div>
+  </div>
+</div>
