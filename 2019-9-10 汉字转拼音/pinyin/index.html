@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>pinyin</title>
+</head>
+<style>
+  ul {
+    color: red;
+  }
+  li {
+    color: #333;
+  }
+</style>
+<div id="one">
+  <ul>
+    <li></li>
+  </ul>
+</div>
+<body>
+  <script src="./pinyin.js"></script>
+  <script>
+    // js
+    let listArr = [
+      {
+        "path": "北京市",
+        "code": "110000",
+        "name": "北京市",
+        "id": "a3fed007e93f480ba7c5676e7ff283de",
+        "leaf": false
+      },
+      {
+        "path": "天津市",
+        "code": "120000",
+        "name": "天津市",
+        "id": "02490acec6094f489aa1dc653d1433a5",
+        "leaf": false
+      },
+      {
+        "path": "河北省",
+        "code": "130000",
+        "name": "河北省",
+        "id": "fd7f04eb5abc432184b0bb4029341b57",
+        "leaf": false
+      },
+      {
+        "path": "山西省",
+        "code": "140000",
+        "name": "山西省",
+        "id": "39df45378ec34edfaf490ed1e8a0137f",
+        "leaf": false
+      },
+      {
+        "path": "内蒙古自治区",
+        "code": "150000",
+        "name": "内蒙古自治区",
+        "id": "e0703aa430764a28be91afeff1eaeebc",
+        "leaf": false
+      },
+      {
+        "path": "辽宁省",
+        "code": "210000",
+        "name": "辽宁省",
+        "id": "8614b4ffab8548c2a9a6c14bced88f05",
+        "leaf": false
+      },
+      {
+        "path": "吉林省",
+        "code": "220000",
+        "name": "吉林省",
+        "id": "c96f398d5c0d4a7fbc8c6f3b2710a588",
+        "leaf": false
+      },
+      {
+        "path": "黑龙江省",
+        "code": "230000",
+        "name": "黑龙江省",
+        "id": "8c841efdc15a4887b796f43302e244d5",
+        "leaf": false
+      },
+      {
+        "path": "上海市",
+        "code": "310000",
+        "name": "上海市",
+        "id": "d937070bce8e4e029bb6844271a391ed",
+        "leaf": false
+      },
+      {
+        "path": "江苏省",
+        "code": "320000",
+        "name": "江苏省",
+        "id": "f8065d0efec644f78300d8c0a26dc0ef",
+        "leaf": false
+      },
+      {
+        "path": "浙江省",
+        "code": "330000",
+        "name": "浙江省",
+        "id": "403fd2f886d6431eb4ad22b214f2e261",
+        "leaf": false
+      },
+      {
+        "path": "安徽省",
+        "code": "340000",
+        "name": "安徽省",
+        "id": "341ea6bfd3914f26bf39bf8590cd1015",
+        "leaf": false
+      },
+      {
+        "path": "福建省",
+        "code": "350000",
+        "name": "福建省",
+        "id": "33e65349078e4c03a704707935f240ec",
+        "leaf": false
+      },
+      {
+        "path": "江西省",
+        "code": "360000",
+        "name": "江西省",
+        "id": "28b4dcac9f1e47bc806673821a550e5e",
+        "leaf": false
+      },
+      {
+        "path": "山东省",
+        "code": "370000",
+        "name": "山东省",
+        "id": "8723bfe00e08467496d80f9447cd4585",
+        "leaf": false
+      },
+      {
+        "path": "河南省",
+        "code": "410000",
+        "name": "河南省",
+        "id": "2b4de0c765a54de6a942a252bb4a20b7",
+        "leaf": false
+      },
+      {
+        "path": "湖北省",
+        "code": "420000",
+        "name": "湖北省",
+        "id": "10c6ff933add435bb6ae4bc9fcf387f9",
+        "leaf": false
+      },
+      {
+        "path": "湖南省",
+        "code": "430000",
+        "name": "湖南省",
+        "id": "b061b1396f6e40d2b93d266837bd3258",
+        "leaf": false
+      },
+      {
+        "path": "广东省",
+        "code": "440000",
+        "name": "广东省",
+        "id": "c75b03070daf4c62ad6c9c69c44429bf",
+        "leaf": false
+      },
+      {
+        "path": "广西壮族自治区",
+        "code": "450000",
+        "name": "广西壮族自治区",
+        "id": "2225645de6934b928f63645c95c28c7d",
+        "leaf": false
+      },
+      {
+        "path": "海南省",
+        "code": "460000",
+        "name": "海南省",
+        "id": "4a4d18536826425b99a433629e0888e1",
+        "leaf": false
+      },
+      {
+        "path": "重庆市",
+        "code": "500000",
+        "name": "重庆市",
+        "id": "ab82682a92d444ac9c912ab028db5ff3",
+        "leaf": false
+      },
+      {
+        "path": "四川省",
+        "code": "510000",
+        "name": "四川省",
+        "id": "ef6064db62b84194bb1c19e407c90d3a",
+        "leaf": false
+      },
+      {
+        "path": "贵州省",
+        "code": "520000",
+        "name": "贵州省",
+        "id": "59be66157a9c4904944501dcdea2eb58",
+        "leaf": false
+      },
+      {
+        "path": "云南省",
+        "code": "530000",
+        "name": "云南省",
+        "id": "d137a2e056ed42f28782b4e0bf586fda",
+        "leaf": false
+      },
+      {
+        "path": "西藏自治区",
+        "code": "540000",
+        "name": "西藏自治区",
+        "id": "aff97337856d4b02b26e816628340473",
+        "leaf": false
+      },
+      {
+        "path": "陕西省",
+        "code": "610000",
+        "name": "陕西省",
+        "id": "543a97501d774085a1aba195817c2e88",
+        "leaf": false
+      },
+      {
+        "path": "甘肃省",
+        "code": "620000",
+        "name": "甘肃省",
+        "id": "2b9f5788d2f349b0846249903b71325f",
+        "leaf": false
+      },
+      {
+        "path": "青海省",
+        "code": "630000",
+        "name": "青海省",
+        "id": "9b1571927fab4f5eb2359dcf3dd91dab",
+        "leaf": false
+      },
+      {
+        "path": "宁夏回族自治区",
+        "code": "640000",
+        "name": "宁夏回族自治区",
+        "id": "acd9c925bca1455ba5d6f00e7179d298",
+        "leaf": false
+      },
+      {
+        "path": "新疆维吾尔自治区",
+        "code": "650000",
+        "name": "新疆维吾尔自治区",
+        "id": "7d2d7c870f4545d8afeb97f79d65df61",
+        "leaf": false
+      },
+      {
+        "path": "台湾省",
+        "code": "710000",
+        "name": "台湾省",
+        "id": "8bd215d0c03148ee9859ee77bd520fcf",
+        "leaf": true
+      },
+      {
+        "path": "香港特别行政区",
+        "code": "810000",
+        "name": "香港特别行政区",
+        "id": "7de759f0a18446498d83cfc04cfb5968",
+        "leaf": true
+      },
+      {
+        "path": "澳门特别行政区",
+        "code": "820000",
+        "name": "澳门特别行政区",
+        "id": "a43f1a3367754bfca935e20720a3f487",
+        "leaf": true
+      }
+    ];
+
+    for (let i = 0; i < listArr.length; i++) {
+      listArr[i].pinyin = convertToPinyin(listArr[i].path);
+    }
+
+    let pinyinArr = [
+      { range: 'ABCDEFG', list: [] },
+      { range: 'HIJKLMN', list: [] },
+      { range: 'OPQRST', list: [] },
+      { range: 'UVWXYZ', list: [] }
+    ]
+
+    let len = pinyinArr.length;
+    for (let i = 0; i < len; i++) {
+      let inerlen = pinyinArr[i].range.length;
+      for (let j = 0; j < inerlen; j++) {
+        let firstPy = pinyinArr[i].range[j];
+        for (let y = 0; y < listArr.length; y++) {
+          let inerFirst = listArr[y].pinyin.substr(0, 1);
+          if (firstPy === inerFirst) {
+            pinyinArr[i].list.push(listArr[y]);
+          }
+        }
+      }
+    }
+    
+    for (let i = 0; i < pinyinArr.length; i++) {
+      let newParent = document.createElement('ul');
+      let partext = document.createTextNode('' + pinyinArr[i].range + '');
+      newParent.appendChild(partext);
+      for (let j = 0; j < pinyinArr[i].list.length; j++) {
+        let newChild = document.createElement('li');
+        let newText = document.createTextNode('' + pinyinArr[i].list[j].path + '');
+        newChild.appendChild(newText);
+        newParent.appendChild(newChild);
+      }
+      document.querySelector('#one').appendChild(newParent);
+    }
+    console.log(pinyinArr);
+  </script>
+</body>
+
+</html>
