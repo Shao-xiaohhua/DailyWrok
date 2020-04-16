@@ -1,0 +1,144 @@
+﻿<!DOCTYPE>
+<html>
+<link>
+    <title>用CSS3模拟3D地球仪动画 - Web前端之家</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<style>
+    * {
+        margin:0; padding:0;
+        box-sizing: border-box;
+    }
+    body {
+        background:black;
+    }
+    .wrap {
+        margin: 150px auto;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .wrap, .ball, .yCenter, .zCenter ,.xCenter{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+    }
+    .x1, .x2,  .y1, .y2, .z1, .z2,.yCenter, .zCenter ,.xCenter {
+        position: absolute;
+    }
+    .x1,.x2,.y1,.y2,.z1,.z2 {
+        width: 87.5%;
+        height: 87.5%;
+        border-radius: 50%;
+    }
+    .ball {
+        position: relative;
+        transform-style: preserve-3d;
+        animation: move 10s linear infinite;
+    }
+    .ball .x{
+        top:0;
+        left:0;
+        border: 2px solid #FF0099;
+        transform:translateY(100px);
+    }
+    .ball .y{
+        top:0;
+        left:0;
+        border: 2px solid #a440fb;
+        transform:rotateY(90deg) translateY(100px);
+    }
+    .ball .z{
+        top:0;
+        left:0;
+        border: 2px solid #ffff4f;
+        transform:rotateZ(90deg) translateX(100px);
+    }
+
+    .ball .x1{
+        top:6%;
+        left:6%;
+        border: 1px solid #FF0099;
+        transform:rotateX(90deg) translateZ(50px);
+    }
+    .ball .x2{
+        top:6%;
+        left:6%;
+        border: 1px solid #FF0099;
+        transform:rotateX(270deg) translateZ(50px);
+    }
+    .ball .y1{
+        top:6%;
+        left:6%;
+        border: 1px solid #a440fb;
+        transform:rotateY(90deg) translateZ(50px);
+    }
+    .ball .y2{
+        top:6%;
+        left:6%;
+        border: 1px solid #a440fb;
+        transform:rotateY(270deg) translateZ(50px);
+    }
+
+    .ball .z1{
+        top:6%;
+        left:6%;
+        border: 1px solid #ffff4f;
+        transform:rotateZ(90deg) translateZ(50px);
+    }
+    .ball .z2{
+        top:6%;
+        left:6%;
+        border: 1px solid #ffff4f;
+        transform:rotateZ(270deg) translateZ(-50px);
+    }
+    .ball .xCenter{
+        width:100%;
+        left:0%;
+        border: 2px solid #FF0099;
+        transform:rotateX(90deg);
+    }
+    .ball .yCenter{
+        top:0;
+        left:0;
+        border: 2px solid #a440fb;
+        transform:rotateY(90deg) ;
+    }
+    .ball .zCenter{
+        width:100%;
+        left:0;
+        border: 2px solid #ffff4f;
+        transform:rotateZ(90deg) ;
+    }
+    @keyframes move
+    {
+        100% { transform:  rotateX(360deg) rotateY(360deg) }
+    }
+
+</style>
+<body leftmargin="0" topmargin="0">
+<div class="wrap">
+    <div class="ball">
+
+        <div class="x1"></div>
+        <div class="x2"></div>
+        <div class="xCenter"></div>
+        <div class="x"></div>
+
+        <div class="y1"></div>
+        <div class="yCenter"></div>
+        <div class="y2"></div>
+        <div class="y"></div>
+
+        <div class="z1"></div>
+        <div class="zCenter"></div>
+        <div class="z2"></div>
+        <div class="z"></div>
+
+    </div>
+</div>
+</body>
+</html>
