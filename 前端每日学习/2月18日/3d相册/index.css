@@ -1,0 +1,77 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+/*这是为了消除默认dom元素的内外边距，使得我们写css的时候更精确*/
+body {
+  background: #000;
+}
+.box {
+  width: 100%;
+  height: auto;
+  perspective: 800px;
+  /*设置景深为800px*/
+}
+#photos {
+  width: 110px;
+  height: 180px;
+  margin: 160px auto;
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+  /*设置3d环境*/
+}
+.ptimg {
+  width:100%;
+  height:100%;
+  position:absolute;
+  box-shadow:0 0 8px #eaeaea;
+  box-shadow: 1px -1px 6px #666;
+  border-radius:4px;
+  /* -webkit-box-reflect:below 3px -webkit-linear-gradient(top,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5)); */
+  cursor:pointer;
+}
+.ptimg:nth-child(1) {
+  background-image: url('./img/1.jpg');
+  background-size: cover;
+}
+.ptimg:nth-child(2) {
+  background-image: url('./img/2.jpg');
+  background-size: cover;
+}
+.ptimg:nth-child(3) {
+  background-image: url('./img/3.jpg');
+  background-size: cover;
+}
+.ptimg:nth-child(4) {
+  background-image: url('./img/4.jpg');
+  background-size: cover;
+}
+.ptimg:nth-child(5) {
+  background-image: url('./img/5.jpg');
+  background-size: cover;
+}
+.ptimg:nth-child(6) {
+  background-image: url('./img/6.jpg');
+  background-size: cover;
+}
+.ptimg:nth-child(7) {
+  background-image: url('./img/7.jpg');
+  background-size: cover;
+}
+.ptimg:nth-child(8) {
+  background-image: url('./img/8.jpg');
+  background-size: cover;
+}
+.bottom {
+  width:1200px;
+  height:1200px;
+  position:absolute;
+  top:102%;
+  left:50%;
+  margin-left:-600px;
+  margin-top:-600px;
+  transform:rotateX(90deg);
+  background:-webkit-radial-gradient(center center,600px 600px,rgba(158,158,222,0.5),rgba(0,0,0,0),rgba(158,158,222,0.5),rgba(0,0,0,0),rgba(158,158,222,0.5),rgba(0,0,0,0));
+  border-radius: 50%;
+}

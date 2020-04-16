@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>涟漪扩散</title>
+  <style>
+    .live {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: auto;
+      margin-top: 100px;
+    }
+
+    .live img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    @keyframes living {
+      0% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: 0;
+        /*圆形放大的同时，透明度逐渐减小为0*/
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+    }
+
+    .live span {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      left: 0;
+      bottom: 0;
+      background: #666;
+      border-radius: 50%;
+      -webkit-animation: living 3s linear infinite;
+      z-index: -1;
+    }
+
+    .live span:nth-child(2) {
+      -webkit-animation-delay: 1.5s;
+      /*第二个span动画延迟1.5秒*/
+    }
+  </style>
+</head>
+
+<body>
+  <div class="live">
+    <img src="../image/2.jpg" alt="">
+    <span></span>
+    <span></span>
+  </div>
+</body>
+
+</html>

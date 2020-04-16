@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>瀑布流4(css)</title>
+  <style>
+    /* flexBox 布局 */
+    .masonry {
+      height: 780px;
+      display: flex;
+      flex-flow: column wrap;
+      width: 80%;
+      /* margin: 2em auto; */
+    }
+
+    .item {
+      /* break-inside: avoid; */
+      box-sizing: border-box;
+      padding: 10px;
+    }
+
+    .item__content {
+      border: 1px solid #dddddd;
+    }
+
+    .item__content img {
+      width: 200px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+
+    @media screen and (max-width: 1550px) {
+      .masonry {
+        height: 850px;
+      }
+    }
+
+    @media screen and (max-width: 1350px) {
+      .masonry {
+        height: 1050px;
+      }
+    }
+
+    @media screen and (max-width: 1100px) {
+      .masonry {
+        height: 1350px;
+      }
+    }
+
+    @media screen and (max-width: 920px) {
+      .masonry {
+        height: 1700px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="masonry">
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/10.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/9.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/8.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/7.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/6.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/5.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/4.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/16.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/15.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/14.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/13.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/12.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/3.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/2.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/1.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/10.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/16.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/15.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/14.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/13.jpg" alt="">
+      </div>
+    </div>
+    <div class="item">
+      <div class="item__content">
+        <img src="./image/12.jpg" alt="">
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

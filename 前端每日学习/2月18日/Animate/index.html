@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>animate</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+  <div class="box1">
+    <h1>匀速直线运动animate1</h1>
+    <div class="head">
+      <span class="left-eye"></span>
+      <span class="right-eye"></span>
+      <span class="nose"></span>
+      <span class="mouth"></span>
+    </div>
+    <div style="padding-top: 20px;">
+      <button class="start">开始飞</button>
+    </div>
+  </div>
+  <div class="box2">
+    <h1>变速直线运动animate2</h1>
+    <div class="head">
+      <span class="left-eye"></span>
+      <span class="right-eye"></span>
+      <span class="nose"></span>
+      <span class="mouth"></span>
+    </div>
+    <div style="padding-top: 20px;">
+      <button class="start">开始飞</button>
+    </div>
+  </div>
+  <div class="box3">
+    <h1>各种属性animate3</h1>
+    <div class="inner"></div>
+    <div style="padding-top: 20px;">
+      <button class="start">开始变形</button>
+    </div>
+  </div>
+  <script src="./animate.js"></script>
+  <script>
+    var head1 = document.querySelector('.box1 .head');
+    var btnstart1 = document.querySelector('.box1 .start');
+    console.log(btnstart1);
+
+    btnstart1.addEventListener('click', function () {
+      animate1(head1, 800, 10)
+    })
+    var head2 = document.querySelector('.box2 .head');
+    var btnstart2 = document.querySelector('.box2 .start');
+    btnstart2.addEventListener('click', function () {
+      animate2(head2, 800);
+    })
+    var head3 = document.querySelector('.box3 .inner');
+    var btnstart3 = document.querySelector('.box3 .start');
+    btnstart3.addEventListener('click', function () {
+      animate3(head3, {
+        width: '150px',
+        height: '150px',
+        left: '800px',
+        borderRadius: "40px"
+      });
+    })
+  </script>
+</body>
+
+</html>

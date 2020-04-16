@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /********
+     * 职责链概念：
+     * 
+     * 职责链是使多个对象都有机会处理请求，从而避免发送者和接受者之间的耦合关系，
+     * 将这个对象练成一条链，并沿着这条连传递该请求，直到有一个对象处理它为止。
+     * 
+     * 职责链产生情境：
+     * 
+     * 链中收到请求的对象要么亲自处理它，要么转发给下一个候选者，提交方并不明确有多少个对象会处理它，
+     * 任意候选者都可以响应响应的请求，可以在运行时决定哪些候选者参与到链中。
+    */
+     
+    // 职责链中要验证的方法
+    function fn1(a) {
+      if(a>100) {
+        console.log(a + '大于100');
+      }else {
+        return 'nextFn';
+      }
+    }  
+    function fn2(a) {
+      if(a>50) {
+        console.log(a + '大于50');
+      }else {
+        return 'nextFn';
+      }
+    }
+    function fn3(a) {
+      if(a>25) {
+        console.log(a + '大于25');
+      }else {
+        console.log('过小')
+      }
+    }
+    // 职责链构造函数
+    var filtration = function(fn) {
+      this.fn = fn;
+      this.nextFn = null;
+    }
+    // 给构造函数的原型上添加下一步验证的方法
+    filtration.prototype.setNext = function(nextFn) {
+      this.nextFn = nextFn;
+    }
+    // 给原型上添加执行的方法
+    filtration.prototype.runFn = function() {
+      var result = this.fn.apply(this, arguments);
+      if(result === 'nextFn') {
+        this.nextFn.runFn.apply(this.nextFn, arguments);
+      }
+    }
+    // 将执行的方法用构造函数包装
+    var filer1 = new filtration(fn1);
+    var filer2 = new filtration(fn2);
+    var filer3 = new filtration(fn3);
+
+    // 将包装后执行方法，按顺序添加到同一变量中
+    filer1.setNext(filer2);
+    filer2.setNext(filer3);
+
+    // 使用验证
+    filer1.runFn(70);
+    filer1.runFn(101);
+    filer1.runFn(30);
+    filer1.runFn(0);
+
+  </script>
+</body>
+</html>

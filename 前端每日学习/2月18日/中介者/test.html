@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /******
+      中介者模式的作用就是解除对象和对象之间的紧耦合关系。
+      增加一个中介者对象后，所有的相关对象都通过中介者来通信，
+      而不是相互引用，所以当一个对象发生改变时，只需要通知中介者对象就可以了。
+      */ 
+    var feiji=function(name){
+        this.name=name;
+    }
+    feiji.prototype.send=function(msg,to){
+        console.log(this.name+"发送了信息");
+        tatai.send(msg,to);
+    }
+    feiji.prototype.jieshou=function(msg){
+        console.log(this.name+"【接受到】"+msg);
+    }
+    var tatai={
+        all:{},
+        zhuce:function(feiji){
+            this.all[feiji.name]=feiji;
+        },
+        send:function(msg,to){
+            this.all[to.name].jieshou(msg);
+        }
+    }
+    var feiji1=new feiji('feiji1');
+    var feiji2=new feiji('feiji2');
+    tatai.zhuce(feiji1);
+    tatai.zhuce(feiji2);
+    console.log(tatai.all);
+    feiji1.send("我马上降落，还有200米",feiji2);
+    </script>
+  </body>
+</html>

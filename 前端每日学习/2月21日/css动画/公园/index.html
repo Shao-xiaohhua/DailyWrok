@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>公园</title>
+  <style>
+    .main {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin: 100px auto;
+      border: 1px solid #eee;
+      overflow: hidden;
+    }
+
+    .top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      animation: color_change 12s linear infinite;
+    }
+
+    @keyframes color_change {
+      0% {
+        background: linear-gradient(to bottom, #9fd9f7, #fff);
+      }
+
+      50% {
+        background: linear-gradient(to bottom, #b4b4b4, #fff);
+      }
+
+      100% {
+        background: linear-gradient(to bottom, #9fd9f7, #fff);
+      }
+    }
+
+    .water {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background-image: url("../image/5.png");
+      animation: water_wave 4s linear infinite;
+    }
+
+    .one {
+      opacity: .5;
+      background-position: 120px 0;
+      animation: water_wave 10s linear infinite;
+    }
+
+    .two {
+      opacity: .3;
+      background-position: 60px 0;
+      animation: water_wave 8s linear infinite;
+    }
+
+    @keyframes water_wave {
+      0% {
+        background-position: 0 0
+      }
+
+      to {
+        background-position: 532px 0
+      }
+    }
+
+    .cloud {
+      width: 180px;
+      /*根据宽度或高度那个小然后改变*/
+      height: 50px;
+      background: #fff;
+      border-radius: 150px;
+      position: absolute;
+      left: 220px;
+      top: 120px;
+      animation: cl0 12s infinite linear;
+
+    }
+
+    .cloud1 {
+      width: 90px;
+      height: 90px;
+      background: #fff;
+      position: absolute;
+      border-radius: 70px;
+      left: 10px;
+      top: -40px;
+    }
+
+    .cloud2 {
+      width: 110px;
+      height: 110px;
+      background: #fff;
+      position: absolute;
+      border-radius: 70px;
+      left: 50px;
+      top: -70px;
+    }
+
+    @keyframes cl0 {
+      0% {
+        transform: translateX(-50px)
+      }
+
+      100% {
+        transform: translateX(20px)
+      }
+    }
+
+    .sun {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      width: 100px;
+      height: 100px;
+      background-image: url("../image/6.png");
+      background-size: 100px 100px;
+      animation: sun_change 12s infinite linear;
+    }
+
+    @keyframes sun_change {
+      0% {
+        transform: rotate(0deg);
+        top: 30px;
+      }
+
+      25% {
+        transform: rotate(90deg);
+        top: 230px;
+      }
+
+      50% {
+        transform: rotate(180deg);
+        top: 470px;
+      }
+
+      75% {
+        transform: rotate(270deg);
+        top: 230px;
+      }
+
+      100% {
+        transform: rotate(360deg);
+        top: 30px;
+      }
+    }
+
+    .moon {
+      position: absolute;
+      top: 470px;
+      right: 20px;
+      width: 100px;
+      height: 100px;
+      background-image: url("../image/0.png");
+      background-size: 100px 100px;
+      animation: moon_change 12s infinite linear;
+    }
+
+    @keyframes moon_change {
+      0% {
+        top: 470px;
+      }
+
+      50% {
+        top: 30px;
+      }
+
+      100% {
+        top: 470px;
+      }
+    }
+
+    .bird {
+      position: absolute;
+      top: 100px;
+      left: 300px;
+      z-index: 10;
+      width: 100px;
+      height: 100px;
+      background-image: url("../image/8.png");
+      background-size: 100px 100px;
+      animation: bird_change 3s 1 linear;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes bird_change {
+      0% {
+        top: 100px;
+        left: 300px;
+        transform: scale(1);
+      }
+
+      /* 50%{
+        top: 0px;
+        left: 150px;
+        transform: scale(0);
+      } */
+      100% {
+        top: -100px;
+        left: 150px;
+        transform: scale(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main">
+    <div class="top"></div>
+    <div class="sun"></div>
+    <div class="moon"></div>
+    <div class="bird"></div>
+    <div class="cloud">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+    </div>
+    <div class="water one"></div>
+    <div class="water two"></div>
+    <div class="water"></div>
+  </div>
+
+</body>
+
+</html>

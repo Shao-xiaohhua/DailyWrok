@@ -1,0 +1,106 @@
+html,body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+ul,li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.scroll-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 250px;
+}
+.line {
+  float: left;
+  width: 100px;
+  height: 250px;
+  transform-style: preserve-3d;
+  transition: all 3s;
+}
+.line:nth-of-type(2) {
+  transition-delay: .2s
+}
+.line:nth-of-type(3) {
+  transition-delay: .4s
+}
+.line:nth-of-type(4) {
+  transition-delay: .6s
+}
+.line:nth-of-type(5) {
+  transition-delay: .8s
+}
+.line:nth-of-type(6) {
+  transition-delay: 1s
+}
+
+.surface {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #fff;
+}
+.line:nth-of-type(1) .surface {
+  background-position: 0 center;
+}
+.line:nth-of-type(2) .surface {
+  background-position: -100px center;
+}
+.line:nth-of-type(3) .surface {
+  background-position: -200px center;
+}
+.line:nth-of-type(4) .surface {
+  background-position: -300px center;
+}
+.line:nth-of-type(5) .surface {
+  background-position: -400px center;
+}
+.line:nth-of-type(6) .surface {
+  background-position: -500px center;
+}
+
+.surface:nth-of-type(1) {
+  background-image: url('./img/1.JPG');
+  transform: translateZ(125px);
+}
+.surface:nth-of-type(2) {
+  background-image: url('./img/2.JPG');
+  transform: rotateX(90deg) translateZ(125px);
+}
+.surface:nth-of-type(3) {
+  background-image: url('./img/3.JPG');
+  transform: rotateX(180deg) translateZ(125px);
+}
+.surface:nth-of-type(4) {
+  background-image: url('./img/4.JPG');
+  transform: rotateX(270deg) translateZ(125px);
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: #fff;
+  background-color: rgba(67, 67, 67, .6);
+  cursor: pointer;
+}
+.left {
+  transform: translate(-350px, -50%);
+}
+.right {
+  transform: translate(310px, -50%);
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <ul class="scroll-box">
+      <li class="line">
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+      </li>
+      <li class="line">
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+      </li>
+      <li class="line">
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+      </li>
+      <li class="line">
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+      </li>
+      <li class="line">
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+      </li>
+      <li class="line">
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+        <span class="surface"></span>
+      </li>
+    </ul>
+    <div class="arrow left"><</div>
+    <div class="arrow right">></div>
+    <script>
+    window.onload = function() {
+      var left = document.querySelector('.left');
+      var right = document.querySelector('.right');
+      var li = document.querySelectorAll('.line');
+      var scroll = 0;
+      var flag = false;
+      left.addEventListener('click', function() {
+        if(flag) return;
+        flag = true;
+        scroll--;
+        boxScroll();
+      })
+      right.addEventListener('click', function() {
+        if(flag) return;
+        flag = true;
+        scroll++;
+        boxScroll();
+      })
+      function boxScroll() {
+        li.forEach(e => {
+          e.style.transform = 'rotateX(' + 90*scroll + 'deg)';
+        })
+        setTimeout(function(){
+          flag = false;
+        }, 4000);
+      }
+    }
+    </script>
+  </body>
+</html>

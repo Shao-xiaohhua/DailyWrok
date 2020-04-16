@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>图片叠加</title>
+  <style>
+    .pics {
+      position: relative;
+      width: 400px;
+      height: 250px;
+    }
+
+    .pic1 {
+      width: 400px;
+      height: 250px;
+    }
+
+    @keyframes picDraw {
+      0% {
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .pic2 {
+      position: absolute;
+      width: 400px;
+      height: 250px;
+      left: 0;
+      top: 0;
+      -webkit-animation: picDraw 5s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pics">
+    <img src="../image/3.jpg" alt="" class="pic1">
+    <img src="../image/4.jpg" alt="" class="pic2">
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>弹框</title>
+  <style>
+    /*button样式*/
+    .btnDiv {
+      text-align: center;
+    }
+
+    .openPopUpBtn,
+    .closePopUpBtn {
+      width: 60px;
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid #c9c9c9;
+      background-color: #FFF;
+      box-shadow: 1px 1px 1px 1px #eee;
+    }
+
+    .openPopUpBtn {
+      margin-top: 50px;
+    }
+
+    .openPopUpBtn:hover,
+    .closePopUpBtn:hover {
+      background-color: #eee;
+      cursor: pointer;
+    }
+
+    /*弹框样式*/
+    .popUp {
+      width: 600px;
+      height: 500px;
+      text-align: center;
+      background-color: #FFFeee;
+      border: 1px solid #ccc;
+      box-shadow: 1px 1px 1px 1px #eee;
+      position: absolute;
+      left: 50%;
+      margin-left: -300px;
+      opacity: 0;
+      /* 透明度为0 */
+    }
+
+    .closePopUpBtn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translate(-50%);
+    }
+
+    /*定义CSS样式*/
+    /*定义打开弹窗动画*/
+    #showCont {
+      animation: showPopUp 2s;
+      animation-fill-mode: forwards;
+      /*保持动画后的状态*/
+    }
+
+    /*定义关闭弹窗动画*/
+    #hiddenCont {
+      animation: hiddenPopUp 2s;
+      animation-fill-mode: forwards;
+    }
+
+    /*定义动画规则*/
+    /* 打开弹窗动画 */
+    @keyframes showPopUp {
+      0% {
+        opacity: 0;
+        top: -60%;
+        transform: rotateZ(0deg);
+      }
+
+      25% {
+        transform: rotate(30deg);
+      }
+
+      50% {
+        transform: rotateZ(-30deg);
+      }
+
+      75%{
+        transform: rotate(10deg);
+      }
+
+      100% {
+        opacity: 1;
+        top: 20%;
+        transform: rotateZ(0deg);
+      }
+    }
+
+    /*关闭弹窗动画 和打开动画相反即可 */
+    @keyframes hiddenPopUp {
+      0% {
+        opacity: 1;
+        top: 20%;
+        transform: rotateZ(0deg);
+      }
+
+      25% {
+        transform: rotate(30deg);
+      }
+
+      50% {
+        transform: rotateZ(-30deg);
+      }
+
+      75%{
+        transform: rotate(10deg);
+      }
+
+      100% {
+        opacity: 0;
+        top: -60%;
+        transform: rotateZ(0deg);
+      }
+    }
+    .test{
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      margin-top: 200px;
+      border: 1px solid #000;
+      transform: rotate(45deg);
+      transform-origin: 50% 0%;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var popUp = document.getElementsByClassName('popUp'); 
+      var openBtn = document.getElementById('openBtn'); 
+      var closeBtn = document.getElementById('closeBtn'); 
+
+      //点击弹窗按钮触发事件
+      openBtn.onclick = function () {
+        //给div.popUp添加一个名叫showCont的id,随后该id执行对应动画
+        popUp[0].setAttribute('id', 'showCont');
+      }
+
+      //点击关闭按钮触发事件
+      closeBtn.onclick = function () {
+        //给div.popUp添加一个名叫hiddenCont的id,随后该id执行对应动画   
+        popUp[0].setAttribute('id', 'hiddenCont');
+      }
+
+    }
+  </script>
+</head>
+
+<body>
+  <div class="test"></div>
+  <div class="btnDiv">
+    <button class="openPopUpBtn" id="openBtn">弹窗</button>
+  </div>
+
+  <div class="popUp">
+    <p>我是弹窗内容</p>
+    <button class="closePopUpBtn" id="closeBtn">关闭</button>
+  </div>
+</body>
+
+</html>
